@@ -3,6 +3,8 @@ const String imagePath = "assets/images";
 const String svgPath = "assets/svg";
 
 abstract class ImageAssets {
+  static const String homeBackground = "$imagePath/homeBackground.png";
+
 
 }
 class SvgAssets{
@@ -19,8 +21,8 @@ class SvgAssets{
   static const String exploreSelected = "$svgPath/coloredExplore.svg";
   static const String profileSelected = "$svgPath/coloredProfile.svg";
 
+  // icons
+ static const String favoriteIcon = "$svgPath/favorite.svg";
 
-
-  //
 
 }
