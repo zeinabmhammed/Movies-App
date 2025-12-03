@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'core/app_routes.dart';
+import 'core/screens_wrapper/screens_wrapper.dart';
+import 'core/theme/AppTheme.dart';
+import 'injection_container.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
   runApp(const MyApp());
 }
 
@@ -12,10 +18,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Movies App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: AppThemes.darkTheme,
+      debugShowCheckedModeBanner: false,
+      routes: {
+        AppRoutes.browseRoute: (_) => const MovieBrowseWrapper(),
+        AppRoutes.searchRoute: (_) => const MovieSearchWrapper(),
+        AppRoutes.profileRoute: (_) => const ProfileWrapper(),
+        AppRoutes.updateProfileRoute: (_) => const UpdateProfileWrapper(),
+      },
+      initialRoute: AppRoutes.profileRoute,
     );
   }
 }
-
