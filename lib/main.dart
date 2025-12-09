@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'core/app_routes.dart';
+import 'core/routes_manger/routes.dart';
 import 'core/screens_wrapper/screens_wrapper.dart';
 import 'core/theme/AppTheme.dart';
 import 'injection_container.dart';
@@ -21,12 +21,12 @@ class MyApp extends StatelessWidget {
       theme: AppThemes.darkTheme,
       debugShowCheckedModeBanner: false,
       routes: {
-        AppRoutes.browseRoute: (_) => const MovieBrowseWrapper(),
-        AppRoutes.searchRoute: (_) => const MovieSearchWrapper(),
-        AppRoutes.profileRoute: (_) => const ProfileWrapper(),
-        AppRoutes.updateProfileRoute: (_) => const UpdateProfileWrapper(),
+        Routes.browseRoute: (_) => const MovieBrowseWrapper(),
+        Routes.searchRoute: (_) => const MovieSearchWrapper(),
+        Routes.profileRoute: (_) => const ProfileWrapper(),
+        Routes.updateProfileRoute: (_) => const UpdateProfileWrapper(),
       },
-      initialRoute: AppRoutes.profileRoute,
+      initialRoute: Routes.profileRoute,
     );
   }
 }

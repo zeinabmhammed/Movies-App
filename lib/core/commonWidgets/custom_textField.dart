@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movies_app/core/appColors/app_colors.dart';
+import '../resources/color_manger.dart';
 import '../responsive/responsive.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -73,7 +73,7 @@ class CustomTextField extends StatelessWidget {
             minHeight: 0,
           ),
           filled: true,
-          fillColor: AppColors.grey,
+          fillColor: ColorManager.grey,
           contentPadding: const EdgeInsets.symmetric(
             vertical: 14,
             horizontal: 16,

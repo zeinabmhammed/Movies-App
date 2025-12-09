@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/appAssets/app_images.dart';
-import 'package:movies_app/core/app_routes.dart';
 import 'package:movies_app/features/profile/presentation/bloc/userProfile/user_profile_bloc.dart';
-import '../../../../core/appColors/app_colors.dart';
+import '../../../../core/resources/color_manger.dart';
+import '../../../../core/routes_manger/routes.dart';
 import '../bloc/history/history_bloc.dart';
 import '../bloc/history/history_event.dart';
 import '../bloc/history/history_state.dart';
@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.grey,
+      backgroundColor: ColorManager.grey,
       body: SafeArea(
         bottom: false,
         child: MultiBlocListener(
@@ -85,7 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onEditProfileTap: () async{
                       final updated = await Navigator.pushNamed(
                         context,
-                        AppRoutes.updateProfileRoute,
+                        Routes.updateProfileRoute,
                         arguments: {
                           'userName': userName,
                           'phone': phone,
@@ -112,7 +112,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Expanded(
                 child: Container(
-                  color: AppColors.black,
+                  color: ColorManager.black,
                   child: Center(
                     child: showWatchList ? WatchListWidget() : HistoryList(),
                   ),

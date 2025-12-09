@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/core/textStyles/textStyles.dart';
-import '../../../../core/appColors/app_colors.dart';
+import '../../../../core/resources/color_manger.dart';
+import '../../../../core/resources/styles_manger.dart';
 import '../../../../core/responsive/responsive.dart';
 import '../../../../domain/entities/movie.dart';
 
@@ -37,20 +37,20 @@ class MovieCard extends StatelessWidget {
                 vertical: responsive.scaleHeight(4),
               ),
               decoration: BoxDecoration(
-                color: AppColors.grey,
+                color: ColorManager.grey,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 children: [
                   Text(
                     movie.rating.toString(),
-                    style: s16Regular(color: AppColors.white),
+                    style: s16Regular(color: ColorManager.white),
                   ),
                   SizedBox(width: responsive.scaleWidth(4)),
                   Icon(
                     Icons.star,
                     size: responsive.scaleWidth(12),
-                    color: AppColors.primary,
+                    color: ColorManager.yellow,
                   ),
                 ],
               ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movies_app/core/textStyles/textStyles.dart';
 import 'package:movies_app/features/profile/presentation/widgets/profile_counter.dart';
 import '../../../../core/appAssets/app_icons.dart';
-import '../../../../core/appColors/app_colors.dart';
 import '../../../../core/commonWidgets/custom_button.dart';
+import '../../../../core/resources/color_manger.dart';
+import '../../../../core/resources/styles_manger.dart';
 import '../../../../core/responsive/responsive.dart';
 
 class ProfileHeaderWidget extends StatelessWidget {
@@ -48,7 +48,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                   SizedBox(height: resp.scaleHeight(8)),
                   Text(
                     userName,
-                    style: s20Bold(color: AppColors.white),
+                    style: s20Bold(color: ColorManager.white),
                   ),
                 ],
               ),
@@ -67,11 +67,11 @@ class ProfileHeaderWidget extends StatelessWidget {
                       children: [
                         Text(
                           "Watch list",
-                          style: s24Bold(color: AppColors.white),
+                          style: s24Bold(color: ColorManager.white),
                         ),
                         Text(
                           "History",
-                          style: s24Bold(color: AppColors.white),
+                          style: s24Bold(color: ColorManager.white),
                         ),
                       ],
                     ),
@@ -89,8 +89,8 @@ class ProfileHeaderWidget extends StatelessWidget {
                 flex: 2,
                 child: CustomButton(
                   text: "Edit Profile",
-                  style: s20Regular(color: AppColors.black),
-                  bgcolor: AppColors.primary,
+                  style: s20Regular(color: ColorManager.black),
+                  bgcolor: ColorManager.yellow,
                   height: resp.scaleHeight(56),
                   onTap: onEditProfileTap,
                 ),
@@ -98,8 +98,8 @@ class ProfileHeaderWidget extends StatelessWidget {
               Expanded(
                 child: CustomButton(
                   text: "Exit",
-                  style: s20Regular(color: AppColors.white),
-                  bgcolor: AppColors.secondry,
+                  style: s20Regular(color: ColorManager.white),
+                  bgcolor: ColorManager.red,
                   height: resp.scaleHeight(56),
                   onTap: onExitTap,
                 ),
@@ -123,12 +123,12 @@ class ProfileHeaderWidget extends StatelessWidget {
                     SizedBox(height: resp.scaleHeight(14)),
                     Text(
                       "Watch list",
-                      style: s20Regular(color: AppColors.white),
+                      style: s20Regular(color: ColorManager.white),
                     ),
                     Container(
                       height: resp.scaleHeight(2),
                       color: showWatchList
-                          ? AppColors.primary
+                          ? ColorManager.yellow
                           : Colors.transparent,
                     ),
                   ],
@@ -148,12 +148,12 @@ class ProfileHeaderWidget extends StatelessWidget {
                     SizedBox(height: resp.scaleHeight(4)),
                     Text(
                       "History",
-                      style: s20Regular(color: AppColors.white),
+                      style: s20Regular(color: ColorManager.white),
                     ),
                     Container(
                       height: resp.scaleHeight(2),
                       color: !showWatchList
-                          ? AppColors.primary
+                          ? ColorManager.yellow
                           : Colors.transparent,
                     ),
                   ],

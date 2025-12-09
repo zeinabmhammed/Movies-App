@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/appAssets/app_images.dart';
-import '../../../../core/appColors/app_colors.dart';
+import '../../../../core/resources/color_manger.dart';
 import '../../../../core/responsive/responsive.dart';
 
 class AvatarPicker extends StatelessWidget {
@@ -18,7 +18,7 @@ class AvatarPicker extends StatelessWidget {
       margin: EdgeInsets.all(resp.scaleWidth(12)),
       height: resp.scaleHeight(389),
       decoration: BoxDecoration(
-        color: AppColors.grey,
+        color: ColorManager.grey,
         borderRadius: BorderRadius.vertical(top: Radius.circular(resp.scaleWidth(20))),
       ),
       child: GridView.builder(
@@ -41,7 +41,7 @@ class AvatarPicker extends StatelessWidget {
               padding: EdgeInsets.all(resp.scaleWidth(8)),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: AppColors.primary,
+                  color: ColorManager.yellow,
                   width: resp.scaleWidth(2),
                 ),
                 borderRadius: BorderRadius.circular(resp.scaleWidth(12)),

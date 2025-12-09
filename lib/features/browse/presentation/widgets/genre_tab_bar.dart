@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/core/textStyles/textStyles.dart';
-import '../../../../core/appColors/app_colors.dart';
+import 'package:movies_app/core/resources/color_manger.dart';
+import '../../../../core/resources/styles_manger.dart';
 import '../../../../core/responsive/responsive.dart';
 
 class GenreTabBar extends StatelessWidget {
@@ -43,17 +43,17 @@ class GenreTabBar extends StatelessWidget {
                 vertical: responsive.scaleHeight(8),
               ),
               decoration: BoxDecoration(
-                color: isSelected ? AppColors.primary : Colors.transparent,
+                color: isSelected ? ColorManager.yellow : Colors.transparent,
                 borderRadius: BorderRadius.circular(responsive.scaleWidth(16)),
                 border: Border.all(
-                  color: isSelected ? Colors.transparent : AppColors.primary,
+                  color: isSelected ? Colors.transparent : ColorManager.yellow,
                   width: responsive.scaleWidth(2),
                 ),
               ),
               child: Text(
                 genre,
                 style: s20Bold(
-                  color: isSelected ? AppColors.black : AppColors.primary,
+                  color: isSelected ? ColorManager.black : ColorManager.yellow,
                 ),
               ),
             ),

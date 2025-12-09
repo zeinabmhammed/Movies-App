@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/appAssets/app_icons.dart';
 import 'package:movies_app/core/commonWidgets/custom_textField.dart';
+import 'package:movies_app/core/resources/color_manger.dart';
 import 'package:movies_app/features/profile/presentation/bloc/updateProfile/update_profile_bloc.dart';
 import 'package:movies_app/features/profile/presentation/bloc/userProfile/user_profile_event.dart';
-import '../../../../core/appColors/app_colors.dart';
 import '../../../../core/commonWidgets/custom_button.dart';
 import '../../../../core/appAssets/app_images.dart';
+import '../../../../core/resources/styles_manger.dart';
 import '../../../../core/responsive/responsive.dart';
-import '../../../../core/textStyles/textStyles.dart';
 import '../bloc/deleteProfile/delete_profile_bloc.dart';
 import '../bloc/deleteProfile/delete_profile_event.dart';
 import '../bloc/deleteProfile/delete_profile_state.dart';
@@ -90,12 +90,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: AppColors.black,
+          backgroundColor: ColorManager.black,
           centerTitle: true,
-          iconTheme: const IconThemeData(color: AppColors.primary),
+          iconTheme: IconThemeData(color: ColorManager.yellow),
           title: Text(
             "Update Profile",
-            style: s16Regular(color: AppColors.primary),
+            style: s16Regular(color: ColorManager.yellow),
           ),
         ),
         body: Padding(
@@ -131,7 +131,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         child: Container(
                           padding: EdgeInsets.all(resp.scaleWidth(6)),
                           decoration: BoxDecoration(
-                            color: AppColors.primary,
+                            color: ColorManager.yellow,
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
@@ -148,16 +148,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               CustomTextField(
                 controller: nameController,
                 hint: "Full Name",
-                hintStyle: s20Regular(color: AppColors.white),
-                style: s20Regular(color: AppColors.white),
+                hintStyle: s20Regular(color: ColorManager.white),
+                style: s20Regular(color: ColorManager.white),
                 prefixIcon: AppIcons.person,
               ),
               SizedBox(height: resp.scaleHeight(16)),
               CustomTextField(
                 controller: phoneController,
                 hint: "Phone Number",
-                hintStyle: s20Regular(color: AppColors.white),
-                style: s20Regular(color: AppColors.white),
+                hintStyle: s20Regular(color: ColorManager.white),
+                style: s20Regular(color: ColorManager.white),
                 prefixIcon: AppIcons.phone,
               ),
               SizedBox(height: resp.scaleHeight(16)),
@@ -167,15 +167,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   padding: EdgeInsets.only(left: resp.scaleWidth(12)),
                   child: Text(
                     "Reset Password",
-                    style: s20Regular(color: AppColors.white),
+                    style: s20Regular(color: ColorManager.white),
                   ),
                 ),
               ),
               Spacer(),
               CustomButton(
                 text: "Delete Account",
-                style: s20Regular(color: AppColors.white),
-                bgcolor: AppColors.secondry,
+                style: s20Regular(color: ColorManager.white),
+                bgcolor: ColorManager.red,
                 height: resp.scaleHeight(56),
                 onTap: () {
                   final bloc = context.read<DeleteProfileBloc>();
@@ -185,8 +185,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               SizedBox(height: resp.scaleHeight(16)),
               CustomButton(
                 text: "Update Data",
-                style: s20Regular(color: AppColors.black),
-                bgcolor: AppColors.primary,
+                style: s20Regular(color: ColorManager.black),
+                bgcolor: ColorManager.yellow,
                 height: resp.scaleHeight(56),
                 onTap: () {
                   final bloc = context.read<UpdateProfileBloc>();

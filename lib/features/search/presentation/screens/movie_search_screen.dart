@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/appAssets/app_icons.dart';
 import 'package:movies_app/core/appAssets/app_images.dart';
-import 'package:movies_app/core/appColors/app_colors.dart';
-import 'package:movies_app/core/textStyles/textStyles.dart';
 import '../../../../core/commonWidgets/custom_textField.dart';
+import '../../../../core/resources/color_manger.dart';
+import '../../../../core/resources/styles_manger.dart';
 import '../bloc/movie_search_bloc.dart';
 import '../bloc/movie_search_event.dart';
 import '../bloc/movie_search_state.dart';
@@ -29,8 +29,8 @@ class MovieSearchScreen extends StatelessWidget {
             children: [
               CustomTextField(
                 hint: "Search...",
-                hintStyle: s16Regular(color: AppColors.white),
-                style: s16Regular(color: AppColors.white),
+                hintStyle: s16Regular(color: ColorManager.white),
+                style: s16Regular(color: ColorManager.white),
                 prefixIcon: AppIcons.searchIcon,
                 onChanged: (value) {
                   context.read<MovieSearchBloc>().add(SearchMovieEvent(value));

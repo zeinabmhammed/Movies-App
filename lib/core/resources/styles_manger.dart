@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/src/painting/text_style.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../AppFonts/AppFonts.dart';
+import 'package:movies_app/core/resources/font_manger.dart';
 
 TextStyle _getTextStyle({
   required double fontSize,
