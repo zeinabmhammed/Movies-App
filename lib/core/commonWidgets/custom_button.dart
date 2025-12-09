@@ -6,6 +6,8 @@ class CustomButton extends StatelessWidget {
   final Color textColor;
   final Color bgColor;
   final Color? borderColor; // ✨ اللون للحواف
+  final TextStyle? style;
+  final Color bgcolor;
   final VoidCallback onTap;
   final double width;
   final double height;
@@ -16,13 +18,15 @@ class CustomButton extends StatelessWidget {
 
   const CustomButton({
     super.key,
+    this.width = 398,
+    this.height = 55.72,
     required this.text,
     required this.textColor,
     required this.bgColor,
+    this.style,
+    required this.bgcolor,
     required this.onTap,
     this.borderColor,
-    this.width = 389, // ✨ زودت الحجم شوية
-    this.height = 55.72, // ✨ زودت الحجم شوية
     this.borderRadius = 16,
     this.leadingIcon,
     this.leadingIcons,
@@ -33,7 +37,8 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final responsive = Responsive(context);
 
-    return GestureDetector(
+
+  return GestureDetector(
         onTap: onTap,
         child: Container(
             width: responsive.scaleWidth(width),

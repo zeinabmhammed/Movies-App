@@ -25,8 +25,6 @@ Future<Result<T>> executeApi<T>(Future<T> Function() apiCall) async {
         e.type == DioExceptionType.connectionError) {
       return Failure("No internet connection");
     }
-
-    // ------------------- BAD RESPONSE -------------------
     if (e.type == DioExceptionType.badResponse) {
       final data = e.response?.data;
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../appColors/app_colors.dart';
+import '../resources/color_manger.dart';
 
 class AppThemes {
   static ThemeData darkTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.black,
+    scaffoldBackgroundColor: ColorManager.black,
     brightness: Brightness.dark,
   );
 

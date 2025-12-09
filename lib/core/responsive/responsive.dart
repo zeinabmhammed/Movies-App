@@ -48,6 +48,6 @@ class Responsive {
 
     if (isMobile) return baseRatio * 0.95;
     if (isTablet) return baseRatio * 1.05;
-    return baseRatio*1.15;
-    }
+    return baseRatio * 1.15;
+  }
 }

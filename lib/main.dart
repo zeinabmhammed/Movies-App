@@ -9,6 +9,10 @@ import 'features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'features/auth/presentation/screens/login_screen/login_screen.dart';
 import 'features/auth/presentation/screens/register_screen/register_screen.dart';
 import 'features/onborading/presentation/bloc/onboarding_bloc.dart';
+import 'core/routes_manger/routes.dart';
+import 'core/screens_wrapper/screens_wrapper.dart';
+import 'core/theme/AppTheme.dart';
+import 'injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +23,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -28,6 +33,8 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+          title: 'Movies App',
+          theme: AppThemes.darkTheme,
             debugShowCheckedModeBanner: false,
             initialRoute: AppRoutes.splashRoute,
             routes: {
@@ -36,9 +43,14 @@ class MyApp extends StatelessWidget {
               AppRoutes.onBoardingRoute: (context) => const OnboardingScreen(),
               AppRoutes.forgetPassword: (context) => const ForgotPasswordScreen(),
               AppRoutes.splashRoute: (context) => const SplashScreen(),
-              // AppRoutes.homeRoute: (context) => const HomeScreen(), // لو حابب تضيفه بعدين
+              Routes.browseRoute: (_) => const MovieBrowseWrapper(),
+              Routes.searchRoute: (_) => const MovieSearchWrapper(),
+              Routes.profileRoute: (_) => const ProfileWrapper(),
+              Routes.updateProfileRoute: (_) => const UpdateProfileWrapper(),
+
             },
             ),
         );
     }
 }
+
