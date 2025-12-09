@@ -1,39 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/api/datasource/MoviesRemoteDataSourceImpl.dart';
-import 'package:movies_app/core/network/dio_client.dart';
-import 'package:movies_app/data/repos/movies_repository_impl.dart';
-import 'package:movies_app/domain/useCase/get_movies_use_case.dart';
-import 'package:movies_app/features/main_layout/home/cubit/movie_cubit.dart';
-import 'package:movies_app/features/main_layout/main_layout.dart';
+import 'core/routes_manger/routes.dart';
+import 'core/screens_wrapper/screens_wrapper.dart';
+import 'core/theme/AppTheme.dart';
+import 'injection_container.dart';
 
-void main() {
-  final dio = DioClient.create();
-  final remoteDataSource = MoviesRemoteDataSourceImpl(dio);
-  final repository = MoviesRepositoryImpl(remoteDataSource);
-  final useCase = GetMoviesUseCase(repository);
-
-  runApp(
-    BlocProvider<MovieCubit>(
-      create: (_) => MovieCubit(getMoviesUseCase: useCase)..fetchMovies(),
-      child: const MyApp(),
-    ),
-  );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
+  runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-
-      builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: const MainLayout(),
-        );
+    return MaterialApp(
+      title: 'Movies App',
+      theme: AppThemes.darkTheme,
+      debugShowCheckedModeBanner: false,
+      routes: {
+        Routes.browseRoute: (_) => const MovieBrowseWrapper(),
+        Routes.searchRoute: (_) => const MovieSearchWrapper(),
+        Routes.profileRoute: (_) => const ProfileWrapper(),
+        Routes.updateProfileRoute: (_) => const UpdateProfileWrapper(),
       },
+      initialRoute: Routes.profileRoute,
     );
   }
 }
