@@ -38,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     pageController: _pageController,
                     movies: movies,
                     onTapMovie: (id) {
+                      debugPrint("Tapped movie id: $id");
                       Navigator.push(
                         context,
                         MaterialPageRoute(

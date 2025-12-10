@@ -2,11 +2,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/resources/assets_manger.dart';
 import 'package:movies_app/core/resources/color_manger.dart';
+import 'package:movies_app/domain/models/movie.dart';
 import 'rating_badge.dart';
 
 class TopCarousel extends StatefulWidget {
   final PageController pageController;
-  final List movies;
+  final List<Movie> movies;
   final void Function(dynamic movieId) onTapMovie;
 
   const TopCarousel({
@@ -86,7 +87,7 @@ class _TopCarouselState extends State<TopCarousel> {
                   value = (1 - (value.abs() * 0.15)).clamp(0.85, 1.1);
                 }
                 return Center(
-                  child: InkWell(
+                  child: GestureDetector(
                     onTap: () => widget.onTapMovie(movie.id),
                     child: Transform.scale(
                       scale: value,

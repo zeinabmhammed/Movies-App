@@ -19,9 +19,9 @@ class SummarySection extends StatelessWidget {
         ? descriptionFull
         : (summary.isNotEmpty == true
         ? summary
-        : (descriptionIntro));
+        : (descriptionIntro ?? ''));
 
-    if (textToShow.isEmpty) return const Placeholder();
+    if (textToShow.isEmpty) return const SizedBox();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

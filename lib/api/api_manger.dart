@@ -42,6 +42,7 @@ class ApiManager {
         "movie_id": movieId,
         "with_images": true,
         "with_cast": true,
+        "with_torrents": true,
       },
     );
     var moviesDetailsResponse = MoviesDetailsResponse.fromJson(response.data);

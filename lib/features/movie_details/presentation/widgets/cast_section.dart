@@ -8,7 +8,7 @@ class CastSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (castList.isEmpty) return const Placeholder();
+    if (castList.isEmpty) return const SizedBox();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
