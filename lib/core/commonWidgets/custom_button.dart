@@ -5,7 +5,7 @@ class CustomButton extends StatelessWidget {
   final String text;
   final Color?textColor;
   final Color ?bgColor;
-  final Color? borderColor; // ✨ اللون للحواف
+  final Color? borderColor;
   final TextStyle? style;
 
   final VoidCallback onTap;

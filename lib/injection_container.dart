@@ -42,7 +42,6 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => ApiManager());
 
-  // Data sources
   sl.registerLazySingleton<WatchListRemoteDataSource>(
     () => WatchListRemoteDataSourceImpl(sl()),
   );
@@ -56,7 +55,6 @@ Future<void> init() async {
     () => UserRemoteDataSourceImpl(sl()),
   );
 
-  // Repositories
   sl.registerLazySingleton<WatchListRepository>(
     () => WatchListRepositoryImpl(sl<WatchListRemoteDataSource>()),
   );
@@ -64,7 +62,6 @@ Future<void> init() async {
   sl.registerLazySingleton<HistoryRepository>(() => HistoryRepoImpl(sl()));
   sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
 
-  // Use cases
   sl.registerLazySingleton(
     () => RemoveFromWatchListUseCase(sl<WatchListRepository>()),
   );
@@ -82,7 +79,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UpdateProfileUseCase(sl<UserRepository>()));
   sl.registerLazySingleton(() => DeleteUserProfileUseCase(sl<UserRepository>()));
 
-  // Blocs
   sl.registerFactory(
     () => WatchListBloc(
       removeFromWatchList: sl<RemoveFromWatchListUseCase>(),

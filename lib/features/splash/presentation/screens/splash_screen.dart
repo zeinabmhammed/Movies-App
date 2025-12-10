@@ -16,14 +16,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // نستخدم Future.delayed لمحاكاة وقت التحميل
     _navigateToNextScreen();
   }
 
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 3));
 
-    // بعد الـ 3 ثواني، ننتقل إلى شاشة الـ Onboarding
     if (!mounted) return;
     Navigator.of(context).pushReplacementNamed(AppRoutes.onBoardingRoute);
   }

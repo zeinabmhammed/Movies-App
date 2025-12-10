@@ -10,8 +10,7 @@ class LoginResponse {
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
       message: json["message"] ?? "An error occurred",
-      token: json["token"] ?? "", // اقرأ التوكن من هنا مباشرة
+      token: json["token"] ?? "",
     );
-    // -------------------- نهاية التعديل --------------------
   }
 }

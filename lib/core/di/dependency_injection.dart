@@ -20,7 +20,6 @@ final instance = GetIt.instance;
 Future<void> initDi() async {
   instance.registerLazySingleton<Dio>(() => DioFactory.createDio());
 
-  // ----------------- Onboarding -----------------
   instance.registerLazySingleton<OnboardingDataSource>(
           () => OnboardingLocalDataSourceImpl());
 
@@ -33,15 +32,11 @@ Future<void> initDi() async {
   instance.registerFactory<OnboardingBloc>(
           () => OnboardingBloc(instance()));
 
-  // ----------------- API Manager -----------------
   instance.registerLazySingleton(() => ApiManager());
 
-  // ----------------- Auth -----------------
-  // هنا نسجل AuthRemoteDataSource أولًا
-  instance.registerLazySingleton<AuthRemoteDataSource>(
-          () => AuthRemoteDataSourceImpl(instance())); // instance() هيكون ApiManager
+    instance.registerLazySingleton<AuthRemoteDataSource>(
+          () => AuthRemoteDataSourceImpl(instance()));
 
-  // بعد كده Repository
   instance.registerLazySingleton<AuthRepository>(
           () => AuthRepositoryImpl(instance()));
 

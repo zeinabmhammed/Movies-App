@@ -51,7 +51,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
 
-                    /// -----------------  HEADER (Back + Title) -----------------
                     Row(
                       children: [
                         GestureDetector(
@@ -76,7 +75,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     SizedBox(height: responsive.scaleHeight(6)),
 
-                    /// -----------------  AVATAR CAROUSEL -----------------
                     AvatarCarousel(
                       images:[
                         AppImages.avatar1,
@@ -95,7 +93,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: responsive.scaleHeight(6)),
 
-                    /// -----------------  NAME FIELD -----------------
                     CustomTextField(
                       hint: "Name",
                       prefixIcon: AppIcons.identification,
@@ -103,7 +100,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: responsive.scaleHeight(16)),
 
-                    /// -----------------  EMAIL FIELD -----------------
                     CustomTextField(
                       hint: "Email",
                       prefixIcon: AppIcons.email,
@@ -112,7 +108,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: responsive.scaleHeight(16)),
 
-                    /// -----------------  PASSWORD FIELD -----------------
                     CustomTextField(
                       hint: "Password",
                       controller: passController,
@@ -127,7 +122,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: responsive.scaleHeight(16)),
 
-                    /// ----------------- CONFIRM PASSWORD FIELD -----------------
                     CustomTextField(
                       hint: "Confirm Password",
                       controller: confirmController,
@@ -142,7 +136,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: responsive.scaleHeight(16)),
 
-                    /// -----------------  PHONE FIELD -----------------
                     CustomTextField(
                       hint: "Phone Number",
                       controller: phoneController,
@@ -151,7 +144,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: responsive.scaleHeight(30)),
 
-                    /// -----------------  CREATE ACCOUNT BUTTON -----------------
                     BlocConsumer<AuthBloc, AuthState>(
                       listener: (context, state) {
                         if (state is AuthSuccess) {
@@ -192,7 +184,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     SizedBox(height: responsive.scaleHeight(16)),
 
-                    /// -----------------  ALREADY HAVE ACCOUNT -----------------
                     Center(
                       child: GestureDetector(
                         onTap: () => Navigator.pushReplacementNamed(context, AppRoutes.loginRoute),

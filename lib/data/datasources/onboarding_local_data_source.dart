@@ -1,9 +1,6 @@
 import 'package:movies_app/core/appAssets/app_images.dart';
 
 import '../../domain/entities/onboarding_entity.dart';
-// يجب تحديث هذا الـ import ليتطابق مع اسم الكلاس الذي تستخدمه لصورك
-// لقد افترضت AppImages، لكن كودك يستخدم AppLogos، لذا يجب التأكد من اسمه.
-// import '../../core/appAssets/app_logos.dart';
 
 abstract class OnboardingDataSource {
   List<OnboardingEntity> getOnboardingData();
@@ -25,7 +22,6 @@ class OnboardingLocalDataSourceImpl implements OnboardingDataSource {
         descriptionText: "Explore a vast collection of movies in all\n qualities and genres. Find your next\n favorite film with ease.",
         buttonText: "Next"
       ),
-      // ... أكمل باقي الـ 5 شاشات هنا باستخدام نفس نمط البيانات
       OnboardingEntity(
         imagePath: AppImages.movie3,
         title: "Explore All Genres",

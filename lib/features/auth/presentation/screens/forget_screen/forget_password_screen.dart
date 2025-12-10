@@ -25,7 +25,6 @@ class ForgotPasswordScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // السطر بتاع السهم + العنوان
                   Row(
                     children: [
                       GestureDetector(
@@ -51,7 +50,6 @@ class ForgotPasswordScreen extends StatelessWidget {
 
                   SizedBox(height: responsive.scaleHeight(40)),
 
-                  // الصورة
                   Image.asset(
                     AppImages.forgotPasswordBro,
                     fit: BoxFit.cover,
@@ -60,7 +58,6 @@ class ForgotPasswordScreen extends StatelessWidget {
 
                   SizedBox(height: responsive.scaleHeight(40)),
 
-                  // Text Field
                   CustomTextField(
                     hint: "Email",
                     prefixIcon: AppIcons.email,
@@ -69,7 +66,6 @@ class ForgotPasswordScreen extends StatelessWidget {
 
                   SizedBox(height: responsive.scaleHeight(30)),
 
-                  // زر Verify Email
                   CustomButton(
                     text: "Verify Email",
                     bgColor: AppColors.primary,

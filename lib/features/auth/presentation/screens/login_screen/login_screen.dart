@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/appAssets/app_images.dart';
 import 'package:movies_app/core/appColors/app_colors.dart';
@@ -8,7 +7,6 @@ import 'package:movies_app/core/commonWidgets/custom_button.dart';
 import 'package:movies_app/core/responsive/responsive.dart';
 import '../../../../../core/appAssets/app_icons.dart';
 import '../../../../../core/commonWidgets/custom_textField.dart';
-import '../../../../../core/commonWidgets/validators.dart';
 import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../../bloc/auth_bloc/auth_event.dart';
 import '../../bloc/auth_bloc/auth_state.dart';
@@ -63,7 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const SizedBox(height: 50),
 
-                      /// ---------------------- LOGO ----------------------
                       SizedBox(
                         height: responsive.scaleHeight(100),
                         child: Image.asset(
@@ -78,7 +75,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         key: _formKey,
                         child: Column(
                           children: [
-                            /// ---------------------- EMAIL FIELD ----------------------
                             CustomTextField(
                               hint: "Email",
                               controller: emailController,
@@ -87,7 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: 20),
 
-                            /// ---------------------- PASSWORD FIELD ----------------------
                             CustomTextField(
                               hint: "Password",
                               controller: passwordController,
@@ -103,7 +98,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
 
-                      /// ---------------------- FORGOT PASSWORD ----------------------
                       GestureDetector(
                         onTap:() {
                           Navigator.pushReplacementNamed(context, AppRoutes.forgetPassword);
@@ -126,7 +120,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       const SizedBox(height: 30),
 
-                      /// ---------------------- LOGIN BUTTON ----------------------
                       CustomButton(
                         text: "Login",
                         bgColor: AppColors.primary,
@@ -134,7 +127,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 380,
                         height: 56,
                         onTap: () {
-                          // 1. تحقق فقط من أن الحقول ليست فارغة
                           if (emailController.text.trim().isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -142,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 backgroundColor: Colors.red,
                               ),
                             );
-                            return; // أوقف التنفيذ إذا كان البريد الإلكتروني فارغًا
+                            return;
                           }
 
                           if (passwordController.text.isEmpty) {
@@ -166,7 +158,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       const SizedBox(height: 25),
 
-                      /// ---------------------- DON'T HAVE ACCOUNT ----------------------
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -195,7 +186,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       const SizedBox(height: 25),
 
-                      /// ---------------------- OR LINE ----------------------
                       Row(
                         children: [
                           Expanded(

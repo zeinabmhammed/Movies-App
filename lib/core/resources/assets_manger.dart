@@ -8,7 +8,6 @@ abstract class ImageAssets {
 
 }
 class SvgAssets{
-  // bottom navigation bar icons
   //not selected
   static const String home = "$svgPath/homeIcon.svg";
   static const String search = "$svgPath/searchIcon.svg";
