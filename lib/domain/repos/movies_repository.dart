@@ -1,5 +1,5 @@
-import 'package:movies_app/data/models/movie_model.dart';
+import '../models/movie.dart';
 
 abstract class MoviesRepository {
-  Future<List<Movies>> getMovies({int page = 1, int limit = 20, String? query});
+  Future<List<Movie>> getMovies({int page = 1, int limit = 20, String? query});
 }

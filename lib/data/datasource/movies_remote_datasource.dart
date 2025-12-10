@@ -1,7 +1,8 @@
-import 'package:movies_app/data/models/movie_model.dart';
+import '../../domain/models/movie.dart';
+
 
 abstract class MoviesRemoteDataSource {
-  Future<List<Movies>> getMovies({
+  Future<List<Movie>> getMovies({
     int page = 1,
     int limit = 20,
     String? query,

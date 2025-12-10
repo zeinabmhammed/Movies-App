@@ -15,10 +15,10 @@ class CustomElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 398,
-      height: 58,
+      width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 12),
           backgroundColor: color,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),

@@ -1,7 +1,4 @@
-class Routes{
-  static const String mainRoute = "/main";
-  static const String movieDetailsRoute = "/movie-details";
-
-
-
+class Routes {
+  static const String mainRoute = "/";
+  static const String moviesDetailsRoute = '/movies-details';
 }

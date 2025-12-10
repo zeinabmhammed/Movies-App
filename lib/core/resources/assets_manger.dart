@@ -23,6 +23,9 @@ class SvgAssets{
 
   // icons
  static const String favoriteIcon = "$svgPath/favorite.svg";
+ static const String playIcon = "$svgPath/play.svg";
+ static const String watchLaterIcon = "$svgPath/watchLater.svg";
+ static const String heartIcon = "$svgPath/heart.svg";
 
 
 }
