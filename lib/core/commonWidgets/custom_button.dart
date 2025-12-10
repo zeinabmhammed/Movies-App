@@ -3,11 +3,11 @@ import '../responsive/responsive.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
-  final Color textColor;
-  final Color bgColor;
+  final Color?textColor;
+  final Color ?bgColor;
   final Color? borderColor; // ✨ اللون للحواف
   final TextStyle? style;
-  final Color bgcolor;
+
   final VoidCallback onTap;
   final double width;
   final double height;
@@ -21,10 +21,9 @@ class CustomButton extends StatelessWidget {
     this.width = 398,
     this.height = 55.72,
     required this.text,
-    required this.textColor,
-    required this.bgColor,
+     this.textColor,
+     this.bgColor,
     this.style,
-    required this.bgcolor,
     required this.onTap,
     this.borderColor,
     this.borderRadius = 16,

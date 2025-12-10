@@ -152,13 +152,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 backgroundColor: Colors.red,
                               ),
                             );
-                            return; // أوقف التنفيذ إذا كانت كلمة المرور فارغة
+                            return;
                           }
 
-                          // 2. إذا كانت الحقول غير فارغة، أرسل الطلب إلى الـ BLoC
+
                           context.read<AuthBloc>().add(LoginRequested(
                             email: emailController.text.trim(),
-                            password: passwordController.text, // لا تحتاج لـ trim() هنا
+                            password: passwordController.text,
                           ));
 
                         },
@@ -226,7 +226,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       const SizedBox(height: 30),
 
-                      /// ---------------------- GOOGLE LOGIN BUTTON ----------------------
                       CustomButton(
                         bgColor: AppColors.primary,
                         textColor: AppColors.black,
@@ -234,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 56,
                         leadingIcon: Text(
                           "G",
-                          style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
+                          style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, color: AppColors.black),
                         ),
                         text: "   Login with Google",
                         onTap: () {},
@@ -242,7 +241,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       const SizedBox(height: 25),
 
-                      /// ---------------------- LANGUAGE SELECTOR ----------------------
                       Image.asset(AppImages.language),
                       const SizedBox(height: 40),
                     ],

@@ -90,7 +90,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                 child: CustomButton(
                   text: "Edit Profile",
                   style: s20Regular(color: ColorManager.black),
-                  bgcolor: ColorManager.yellow,
+                  bgColor: ColorManager.yellow,
                   height: resp.scaleHeight(56),
                   onTap: onEditProfileTap,
                 ),
@@ -99,7 +99,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                 child: CustomButton(
                   text: "Exit",
                   style: s20Regular(color: ColorManager.white),
-                  bgcolor: ColorManager.red,
+                  bgColor: ColorManager.red,
                   height: resp.scaleHeight(56),
                   onTap: onExitTap,
                 ),
