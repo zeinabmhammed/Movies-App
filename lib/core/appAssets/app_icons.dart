@@ -23,4 +23,7 @@ class AppIcons {
   static String phone = "assets/icons/phone.svg";
   static String eyeOff = "assets/icons/🦆 icon _eye off_.svg";
   static String identification = "assets/icons/🦆 icon _Identification_.svg";
+  static String ar = "assets/icons/EG.svg";
+  static String en = "assets/icons/LR.svg";
+
 }

@@ -175,7 +175,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               CustomButton(
                 text: "Delete Account",
                 style: s20Regular(color: ColorManager.white),
-                bgcolor: ColorManager.red,
+                bgColor: ColorManager.red,
                 height: resp.scaleHeight(56),
                 onTap: () {
                   final bloc = context.read<DeleteProfileBloc>();
@@ -186,7 +186,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               CustomButton(
                 text: "Update Data",
                 style: s20Regular(color: ColorManager.black),
-                bgcolor: ColorManager.yellow,
+                bgColor: ColorManager.yellow,
                 height: resp.scaleHeight(56),
                 onTap: () {
                   final bloc = context.read<UpdateProfileBloc>();

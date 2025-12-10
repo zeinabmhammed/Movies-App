@@ -10,10 +10,18 @@ class AppImages {
   static String avatar7 = "assets/images/avatar7.png";
   static String avatar8 = "assets/images/avatar8.png";
   static String avatar9 = "assets/images/avatar9.png";
+  static String movie1 = "assets/images/Movies1.png";
+  static String movie2 = "assets/images/Movies2.png";
+  static String movie3 = "assets/images/Movies3.png";
+  static String movie4 = "assets/images/Movies4.png";
+  static String movie5 = "assets/images/Movies5.png";
+  static String movie6 = "assets/images/Movies6.png";
+  static String forgotPassword = "assets/images/login.png";
+  static String language = "assets/images/Language Switch.png";
+  static String forgotPasswordBro = "assets/images/Forgot password-bro.png";
+  static String maskGroup = "assets/images/Mask group .png";
   static String empty = "assets/images/empty.png";
   static String exitWithIcon = "assets/images/exitWithIcon.png";
-  static String forgotPassword = "assets/images/forgotPassword.png";
-
   static Map<int, String> avatarMap = {
     1: avatar1,
     2: avatar2,
