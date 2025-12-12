@@ -24,10 +24,10 @@ class UserDto {
 
   UserEntity toEntity() {
     return UserEntity(
-        name: name,
-        email: email,
-        avatarId: avatarId,
-        phone: phone
-        );
-    }
+      name: name,
+      email: email,
+      avatarId: avatarId,
+      phone: phone,
+    );
+  }
 }

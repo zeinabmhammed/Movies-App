@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../appColors/app_colors.dart';
 import '../resources/color_manger.dart';
 
 class AppThemes {
@@ -9,12 +8,12 @@ class AppThemes {
   );
 
   static ThemeData textTheme = ThemeData(
-      textTheme: TextTheme(
-          bodyLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          bodySmall: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-          titleLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          titleMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          titleSmall: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-          ),
-      );
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      bodySmall: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+      titleLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      titleMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      titleSmall: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+    ),
+  );
 }

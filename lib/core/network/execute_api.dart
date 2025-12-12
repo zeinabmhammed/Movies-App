@@ -17,8 +17,6 @@ Future<Result<T>> executeApi<T>(Future<T> Function() apiCall) async {
     final response = await apiCall();
     return Success(response);
   } on DioException catch (e) {
-
-    // ---------- TIMEOUT & CONNECTION ERRORS ----------
     if (e.type == DioExceptionType.connectionTimeout ||
         e.type == DioExceptionType.receiveTimeout ||
         e.type == DioExceptionType.sendTimeout ||
@@ -31,20 +29,16 @@ Future<Result<T>> executeApi<T>(Future<T> Function() apiCall) async {
       if (data != null && data['message'] != null) {
         final msg = data['message'];
 
-        // لو message عبارة عن List
         if (msg is List) {
           return Failure(msg.join(", "));
         }
 
-        // لو message عبارة عن String
         return Failure(msg.toString());
       }
 
-      // لو السيرفر مرجعش message
       return Failure('Server error (${e.response?.statusCode})');
     }
 
-    // ------------------- OTHER ERRORS -------------------
     return Failure("Something went wrong");
   }
 }

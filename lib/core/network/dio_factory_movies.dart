@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'api_config.dart';
 
-class DioFactory {
+class DioFactoryMovies {
   static Dio createDio() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: ApiConfig.baseUrl,
+        baseUrl: ApiConfig.moviesBaseUrl,
         connectTimeout: Duration(milliseconds: ApiConfig.connectTimeout),
         receiveTimeout: Duration(milliseconds: ApiConfig.receiveTimeout),
         headers: {"Content-Type": "application/json"},
@@ -26,8 +27,15 @@ class DioFactory {
 
     dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (options, handler) {
+        onRequest: (options, handler) async {
           print("REQUEST [${options.method}] => PATH: ${options.uri}");
+
+          final prefs = await SharedPreferences.getInstance();
+          final token = prefs.getString("token") ?? "";
+          if (token.isNotEmpty) {
+            options.headers["Authorization"] = "Bearer $token";
+          }
+
           return handler.next(options);
         },
         onResponse: (response, handler) {
@@ -45,5 +53,5 @@ class DioFactory {
     );
 
     return dio;
-    }
+  }
 }

@@ -13,7 +13,7 @@ class LoginUseCase {
       ) async {
 
     final result = await repository.login(email, password);
-    print("LoginUseCase result: $result");  // <--- دي هتوريك النتيجة
+    print("LoginUseCase result: $result");
     return result;
     }
 }

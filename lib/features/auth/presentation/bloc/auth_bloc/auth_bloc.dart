@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/network/execute_api.dart';
 import '../../../../../domain/entities/auth_entity.dart';
@@ -14,19 +15,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required this.loginUseCase, required this.registerUseCase})
       : super(AuthInitial()) {
 
-    // LOGIN
     on<LoginRequested>((event, emit) async {
       emit(AuthLoading());
       final result = await loginUseCase(event.email, event.password);
       print("AuthBloc login result: $result");
       if (result is Success<AuthResult>) {
-        emit(AuthSuccess(result.data));
+        final token = result.data.token;
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString("token", token);
+
+        emit(AuthSuccess(result.data, token));
       } else if (result is Failure<AuthResult>) {
         emit(AuthFailure(result.message));
       }
     });
 
-    // REGISTER
     on<RegisterRequested>((event, emit) async {
       emit(AuthLoading());
       final result = await registerUseCase(
@@ -38,7 +41,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         avatarId: event.avatarId,
       );
       if (result is Success<AuthResult>) {
-        emit(AuthSuccess(result.data));
+        final token = result.data.token;
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString("token", token);
+
+        emit(AuthSuccess(result.data,token));
       } else if (result is Failure<AuthResult>) {
         emit(AuthFailure(result.message));
       }

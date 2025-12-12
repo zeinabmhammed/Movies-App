@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/core/appColors/app_colors.dart';
-import 'package:movies_app/core/app_routes.dart';
 import 'package:movies_app/core/commonWidgets/custom_button.dart';
 import 'package:movies_app/domain/entities/onboarding_entity.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // <--- تم إضافة هذا السطر
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/resources/color_manger.dart';
 import '../../../../core/responsive/responsive.dart';
+import '../../../../core/routes_manger/routes.dart';
 import '../../../../data/datasources/onboarding_local_data_source.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.initState();
     data = OnboardingLocalDataSourceImpl().getOnboardingData();
     _controller.addListener(() {
-      if (mounted) { // التحقق من أن الـ widget ما زال في الـ tree
+      if (mounted) {
         setState(() {
           currentIndex = _controller.page!.round();
         });
@@ -34,7 +34,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   void dispose() {
-    _controller.dispose(); // تنظيف الـ controller عند الخروج
+    _controller.dispose();
     super.dispose();
   }
 
@@ -52,31 +52,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
-  // ---- بداية الدالة الجديدة التي ستحتوي على المنطق ----
   Future<void> _finishOnboarding() async {
-    // 1. احصل على نسخة من SharedPreferences
     final prefs = await SharedPreferences.getInstance();
 
-    // 2. احفظ القيمة true للإشارة إلى أن الـ Onboarding قد تم رؤيته
     await prefs.setBool('hasSeenOnboarding', true);
 
-    // 3. انتقل إلى شاشة التسجيل/الدخول وامنع المستخدم من الرجوع
-    if (mounted) { // التحقق مرة أخرى قبل الانتقال
-      Navigator.pushReplacementNamed(context, AppRoutes.loginRoute);
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, Routes.loginRoute);
     }
   }
-  // ---- نهاية الدالة الجديدة ----
-
 
   @override
   Widget build(BuildContext context) {
     final responsive = Responsive(context);
 
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: ColorManager.black,
       body: Stack(
         children: [
-          // PageView
           PageView.builder(
             controller: _controller,
             itemCount: data.length,
@@ -87,8 +80,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   SizedBox(
                     height: index == 0
-                        ? responsive.height // أول شاشة full screen
-                        : responsive.height * 0.75, // من التانية 3/4
+                        ? responsive.height
+                        : responsive.height * 0.75,
                     width: responsive.width,
                     child: Image.asset(
                       item.imagePath,
@@ -108,7 +101,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
           ),
 
-          // SCREEN 1 → Next only
           if (currentIndex == 0)
             Positioned(
               bottom: responsive.scaleHeight(30),
@@ -120,7 +112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     data[currentIndex].title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.white,
+                      color: ColorManager.white,
                       fontSize: responsive.scaleWidth(28),
                       fontWeight: FontWeight.bold,
                     ),
@@ -131,7 +123,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       data[currentIndex].descriptionText,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: ColorManager.white,
                         fontSize: responsive.scaleWidth(16),
                         height: 1.4,
                       ),
@@ -139,8 +131,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   SizedBox(height: responsive.scaleHeight(20)),
                   CustomButton(
                     text: data[currentIndex].buttonText,
-                    textColor: AppColors.black,
-                    bgColor: AppColors.primary,
+                    textColor: ColorManager.black,
+                    bgColor: ColorManager.yellow,
                     width: responsive.scaleWidth(400),
                     height: responsive.scaleHeight(60),
                     onTap: next,
@@ -149,7 +141,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-          // SCREEN 2 → Bottom Sheet + Next only
           if (currentIndex == 1)
             _buildBottomSheet(
               responsive,
@@ -159,7 +150,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     data[currentIndex].title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.white,
+                      color: ColorManager.white,
                       fontSize: responsive.scaleWidth(28),
                       fontWeight: FontWeight.bold,
                     ),
@@ -170,7 +161,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       data[currentIndex].descriptionText,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: ColorManager.white,
                         fontSize: responsive.scaleWidth(16),
                         height: 1.4,
                       ),
@@ -178,8 +169,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   SizedBox(height: responsive.scaleHeight(20)),
                   CustomButton(
                     text: "Next",
-                    textColor: AppColors.black,
-                    bgColor: AppColors.primary,
+                    textColor: ColorManager.black,
+                    bgColor: ColorManager.yellow,
                     width: responsive.scaleWidth(400),
                     height: responsive.scaleHeight(60),
                     onTap: next,
@@ -188,7 +179,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-          // SCREEN 3 → 5 → Bottom Sheet + Next/Back
           if (currentIndex >= 2 && currentIndex <= 4)
             _buildBottomSheet(
               responsive,
@@ -199,7 +189,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     data[currentIndex].title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.white,
+                      color: ColorManager.white,
                       fontSize: responsive.scaleWidth(28),
                       fontWeight: FontWeight.bold,
                     ),
@@ -210,7 +200,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       data[currentIndex].descriptionText,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: ColorManager.white,
                         fontSize: responsive.scaleWidth(16),
                         height: 1.4,
                       ),
@@ -218,8 +208,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   SizedBox(height: responsive.scaleHeight(20)),
                   CustomButton(
                     text: "Next",
-                    textColor: AppColors.black,
-                    bgColor: AppColors.primary,
+                    textColor: ColorManager.black,
+                    bgColor: ColorManager.yellow,
                     width: responsive.scaleWidth(400),
                     height: responsive.scaleHeight(60),
                     onTap: next,
@@ -227,9 +217,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   SizedBox(height: responsive.scaleHeight(6)),
                   CustomButton(
                     text: "Back",
-                    textColor: AppColors.primary,
-                    bgColor: AppColors.black,
-                    borderColor: AppColors.primary,
+                    textColor: ColorManager.yellow,
+                    bgColor: ColorManager.black,
+                    borderColor: ColorManager.yellow,
                     width: responsive.scaleWidth(400),
                     height: responsive.scaleHeight(60),
                     onTap: back,
@@ -238,7 +228,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-          // SCREEN 6 → Finish + Back
           if (currentIndex == 5)
             _buildBottomSheet(
               responsive,
@@ -249,7 +238,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     data[currentIndex].title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.white,
+                      color: ColorManager.white,
                       fontSize: responsive.scaleWidth(28),
                       fontWeight: FontWeight.bold,
                     ),
@@ -260,7 +249,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       data[currentIndex].descriptionText,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: ColorManager.white,
                         fontSize: responsive.scaleWidth(16),
                         height: 1.4,
                       ),
@@ -268,20 +257,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   SizedBox(height: responsive.scaleHeight(20)),
                   CustomButton(
                     text: "Finish",
-                    textColor: AppColors.black,
-                    bgColor: AppColors.primary,
+                    textColor: ColorManager.black,
+                    bgColor: ColorManager.yellow,
                     width: responsive.scaleWidth(400),
                     height: responsive.scaleHeight(60),
-                    // -------- تم تعديل هذا الجزء فقط --------
-                    onTap: _finishOnboarding, // استدعاء الدالة الجديدة
-                    // ----------------------------------------
+                    onTap: _finishOnboarding,
                   ),
                   SizedBox(height: responsive.scaleHeight(12)),
                   CustomButton(
                     text: "Back",
-                    textColor: AppColors.primary,
-                    bgColor: AppColors.black,
-                    borderColor: AppColors.primary,
+                    textColor: ColorManager.yellow,
+                    bgColor: ColorManager.black,
+                    borderColor: ColorManager.yellow,
                     width: responsive.scaleWidth(400),
                     height: responsive.scaleHeight(60),
                     onTap: back,
@@ -303,7 +290,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         duration: const Duration(milliseconds: 100),
         padding: EdgeInsets.all(responsive.scaleWidth(20)),
         decoration: BoxDecoration(
-          color: AppColors.black,
+          color: ColorManager.black,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(responsive.scaleWidth(25)),
             topRight: Radius.circular(responsive.scaleWidth(25)),

@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class AvatarCarousel extends StatefulWidget {
-  final List<String> images; // paths of avatar images
+  final List<String> images;
   final double height;
   final double viewportFraction;
   final Function(int)? onAvatarSelected;
@@ -23,10 +23,8 @@ class AvatarCarousel extends StatefulWidget {
 
 class _AvatarCarouselState extends State<AvatarCarousel> {
   late final PageController _controller;
-  // هذا المتغير سيتتبع القيمة الحقيقية للصفحة لتجنب المشاكل الأولية
   late final ValueNotifier<double> _pageNotifier;
 
-  // لن نحتاج لقائمة مكررة، الخدعة الجديدة أفضل
   // late List<String> _carouselImages;
 
   @override
@@ -60,27 +58,18 @@ class _AvatarCarouselState extends State<AvatarCarousel> {
       height: widget.height,
       child: PageView.builder(
         controller: _controller,
-        // 3. لن نستخدم itemCount محدد، بل سنجعله لانهائياً
-        // itemCount: _carouselImages.length, // <= هذا السطر يُحذف
         scrollDirection: Axis.horizontal,
 
-        // 4. لا حاجة لـ onPageChanged بعد الآن، الـ listener يقوم بالعمل
-        // onPageChanged: ... // <= هذا الجزء يُحذف بالكامل
-
         itemBuilder: (context, index) {
-          // 5. حساب الفهرس الفعلي للصورة
           final int actualIndex = index % widget.images.length;
 
           return ValueListenableBuilder<double>(
             valueListenable: _pageNotifier,
             builder: (context, page, _) {
-              // حساب قيمة البُعد عن المنتصف
               final double value = page - index;
 
-              // حساب مقياس الحجم بناءً على البُعد
               final double scale = (1 - (value.abs() * 0.4)).clamp(0.6, 1.0);
 
-              // حساب الشفافية (اختياري، لكنه يعطي شكل أفضل)
               final double opacity = (1 - (value.abs() * 0.5)).clamp(0.2, 1.0);
 
               return Center(
@@ -90,13 +79,11 @@ class _AvatarCarouselState extends State<AvatarCarousel> {
                     scale: scale,
                     child: GestureDetector(
                       onTap: () {
-                        // عند الضغط، حرك الصورة للمنتصف
                         _controller.animateToPage(
                           index,
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                         );
-                        // استدعاء الدالة الخارجية إذا تم تمريرها
                         widget.onAvatarSelected?.call(actualIndex);
                       },
                       child: CircleAvatar(

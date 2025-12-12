@@ -14,7 +14,7 @@ import '../../features/profile/presentation/screens/update_profile.dart';
 import '../../features/profile/presentation/screens/user_profile_screen.dart';
 import '../../features/search/presentation/bloc/movie_search_bloc.dart';
 import '../../features/search/presentation/screens/movie_search_screen.dart';
-import '../../injection_container.dart';
+import '../di/dependency_injection.dart';
 
 class MovieBrowseWrapper extends StatelessWidget {
   const MovieBrowseWrapper({super.key});
@@ -75,9 +75,6 @@ class UpdateProfileWrapper extends StatelessWidget {
         BlocProvider<DeleteProfileBloc>(
           create: (_) => sl<DeleteProfileBloc>(),
         ),
-        BlocProvider<UserProfileBloc>(
-          create: (_) => sl<UserProfileBloc>()..add(GetProfileEvent()),
-        )
       ],
       child: UpdateProfileScreen(),
     );

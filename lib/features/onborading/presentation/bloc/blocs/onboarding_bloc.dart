@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/network/execute_api.dart';
-import '../../../../domain/entities/onboarding_entity.dart';
-import '../../../../domain/usecases/get_onboarding_data_usecase.dart';
-import '../domain/events/onboarding_event.dart' show OnboardingNextEvent, OnboardingLoadEvent, OnboardingEvent;
-import '../domain/states/onboarding_state.dart'; // استيراد الحالات
+import '../../../../../core/network/execute_api.dart';
+import '../../../../../domain/entities/onboarding_entity.dart';
+import '../../../../../domain/usecases/get_onboarding_data_usecase.dart';
+import '../events/onboarding_event.dart';
+import '../states/onboarding_state.dart';
 
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
@@ -16,14 +16,10 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       : pageController = PageController(),
         super(OnboardingInitial()) {
 
-    // 💡 التسجيل لمعالجة الأحداث
     on<OnboardingLoadEvent>(_onLoadEvent);
     on<OnboardingNextEvent>(_onNextEvent);
   }
 
-  // ===============================================
-  // معالج حدث التحميل (OnboardingLoadEvent)
-  // ===============================================
 
   Future<void> _onLoadEvent(
       OnboardingLoadEvent event,
@@ -33,15 +29,11 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     final result = await getOnboardingDataUseCase.call();
 
     if (result is Success<List<OnboardingEntity>>) {
-      emit(OnboardingSuccess(result.data, 0)); // ابدأ من الصفحة 0
+      emit(OnboardingSuccess(result.data, 0));
     } else if (result is Failure<List<OnboardingEntity>>) {
       emit(OnboardingError(result.message));
     }
   }
-
-  // ===============================================
-  // معالج حدث النقر على التالي (OnboardingNextEvent)
-  // ===============================================
 
   Future<void> _onNextEvent(
       OnboardingNextEvent event,
@@ -52,7 +44,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       final nextIndex = event.currentIndex + 1;
 
       if (nextIndex < currentState.data.length) {
-        // تحديث حالة الـ Bloc و PageController
         pageController.animateToPage(
           nextIndex,
           duration: const Duration(milliseconds: 300),
@@ -60,11 +51,9 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
         );
         emit(OnboardingSuccess(currentState.data, nextIndex));
       }
-      // ملاحظة: إذا كانت الصفحة الأخيرة، فإن الـ OnboardingScreen هو الذي يتعامل مع التوجيه لـ Login
     }
   }
 
-  // دالة تُستخدم عند التمرير اليدوي
   void onPageChanged(int index) {
     if (state is OnboardingSuccess) {
       final currentState = state as OnboardingSuccess;

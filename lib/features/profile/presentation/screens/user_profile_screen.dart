@@ -29,9 +29,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
+    context.read<UserProfileBloc>().add(GetProfileEvent());
     context.read<HistoryBloc>().add(LoadHistoryEvent());
     context.read<WatchListBloc>().add(LoadWatchListEvent());
-    context.read<UserProfileBloc>().add(GetProfileEvent());
   }
 
   @override
@@ -40,86 +40,63 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: ColorManager.grey,
       body: SafeArea(
         bottom: false,
-        child: MultiBlocListener(
-          listeners: [
-            BlocListener<WatchListBloc, WatchListState>(
-              listener: (context, state) {
-                if (state is WatchListLoaded) {
-                  context.read<UserProfileBloc>().add(GetProfileEvent());
+        child: Column(
+          children: [
+            BlocBuilder<UserProfileBloc, ProfileState>(
+              builder: (context, state) {
+                String userName = "User";
+                String phone = "0000000000";
+                int watchListCount = 0;
+                int historyCount = 0;
+                int avatarId = 1;
+
+                if (state is ProfileLoaded) {
+                  userName = state.user.name;
+                  phone = state.user.phone;
+                  watchListCount = state.watchListCount;
+                  historyCount = state.historyCount;
+                  avatarId = state.user.imageId;
                 }
+
+                return ProfileHeaderWidget(
+                  userName: userName,
+                  avatarImage:
+                      AppImages.avatarMap[avatarId] ?? AppImages.avatar1,
+                  watchListCount: watchListCount,
+                  historyCount: historyCount,
+                  showWatchList: showWatchList,
+                  onEditProfileTap: () async {
+                    final updated = await Navigator.pushNamed(
+                      context,
+                      Routes.updateProfileRoute,
+                    );
+                    if (updated == true) {
+                      context.read<UserProfileBloc>().add(GetProfileEvent());
+                    }
+                  },
+                  onExitTap: () {},
+                  onTabChanged: (showWatch) {
+                    setState(() {
+                      showWatchList = showWatch;
+                    });
+                    if (!showWatch) {
+                      context.read<HistoryBloc>().add(LoadHistoryEvent());
+                    } else {
+                      context.read<WatchListBloc>().add(LoadWatchListEvent());
+                    }
+                  },
+                );
               },
             ),
-            BlocListener<HistoryBloc, HistoryState>(
-              listener: (context, state) {
-                if (state is HistoryLoaded) {
-                  context.read<UserProfileBloc>().add(GetProfileEvent());
-                }
-              },
-            ),
-          ],
-          child: Column(
-            children: [
-              BlocBuilder<UserProfileBloc, ProfileState>(
-                builder: (context, state) {
-                  String userName = "User";
-                  String phone = "0000000000";
-                  int watchListCount = 0;
-                  int historyCount = 0;
-                  int avatarId = 1;
-
-                  if (state is ProfileLoaded) {
-                    userName = state.user.name;
-                    phone = state.user.phone;
-                    watchListCount = state.watchListCount;
-                    historyCount = state.historyCount;
-                    avatarId = state.user.imageId;
-                  }
-
-                  return ProfileHeaderWidget(
-                    userName: userName,
-                    avatarImage:
-                        AppImages.avatarMap[avatarId] ?? AppImages.avatar1,
-                    watchListCount: watchListCount,
-                    historyCount: historyCount,
-                    showWatchList: showWatchList,
-                    onEditProfileTap: () async{
-                      final updated = await Navigator.pushNamed(
-                        context,
-                        Routes.updateProfileRoute,
-                        arguments: {
-                          'userName': userName,
-                          'phone': phone,
-                          'avatarImage': avatarId,
-                        },
-                      );
-                      if(updated == true){
-                        context.read<UserProfileBloc>().add(GetProfileEvent());
-                      }
-                    },
-                    onExitTap: () {},
-                    onTabChanged: (showWatch) {
-                      setState(() {
-                        showWatchList = showWatch;
-                      });
-                      if (!showWatch) {
-                        context.read<HistoryBloc>().add(LoadHistoryEvent());
-                      } else {
-                        context.read<WatchListBloc>().add(LoadWatchListEvent());
-                      }
-                    },
-                  );
-                },
-              ),
-              Expanded(
-                child: Container(
-                  color: ColorManager.black,
-                  child: Center(
-                    child: showWatchList ? WatchListWidget() : HistoryList(),
-                  ),
+            Expanded(
+              child: Container(
+                color: ColorManager.black,
+                child: Center(
+                  child: showWatchList ? WatchListWidget() : HistoryList(),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/appAssets/app_images.dart';
-import '../../../../../core/app_routes.dart';
-import '../../../../../core/appColors/app_colors.dart';
 import '../../../../../core/responsive/responsive.dart';
+import '../../../../core/resources/color_manger.dart';
+import '../../../../core/routes_manger/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,16 +16,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // نستخدم Future.delayed لمحاكاة وقت التحميل
     _navigateToNextScreen();
   }
 
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 3));
 
-    // بعد الـ 3 ثواني، ننتقل إلى شاشة الـ Onboarding
     if (!mounted) return;
-    Navigator.of(context).pushReplacementNamed(AppRoutes.onBoardingRoute);
+    Navigator.of(context).pushReplacementNamed(Routes.onBoardingRoute);
   }
 
   @override
@@ -33,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final responsive = Responsive(context);
 
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: ColorManager.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

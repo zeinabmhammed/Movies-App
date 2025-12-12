@@ -44,7 +44,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return AuthResult(
         message: registerRes.message,
         token: "",
-        // register API مفيش token بيرجع، لو عايزة بعد كده login تعمل token
         user: registerRes.user.toEntity(),
       );
     });

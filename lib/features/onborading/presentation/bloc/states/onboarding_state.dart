@@ -1,6 +1,5 @@
 import '../../../../../domain/entities/onboarding_entity.dart';
 
-// هذا الملف يحتوي على جميع الحالات التي يمكن أن تكون عليها شاشة الـ Onboarding
 abstract class OnboardingState {}
 
 class OnboardingInitial extends OnboardingState {}

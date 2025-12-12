@@ -34,5 +34,5 @@ class MovieDto {
     );
   }
 
-// mapper to domain entity (we'll implement entity next)
+// mapper to bloc entity (we'll implement entity next)
 }

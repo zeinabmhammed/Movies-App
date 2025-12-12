@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'api_config.dart';
 
-class DioFactory {
+class DioFactoryAuth {
   static Dio createDio() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: ApiConfig.moviesBaseUrl,
+        baseUrl: ApiConfig.baseUrl,
         connectTimeout: Duration(milliseconds: ApiConfig.connectTimeout),
         receiveTimeout: Duration(milliseconds: ApiConfig.receiveTimeout),
         headers: {"Content-Type": "application/json"},
@@ -45,5 +45,5 @@ class DioFactory {
     );
 
     return dio;
-  }
+    }
 }

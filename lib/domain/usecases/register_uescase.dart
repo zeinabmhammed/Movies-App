@@ -15,12 +15,12 @@ class RegisterUseCase {
     required int avatarId,
   }) {
     return repository.register(
-        name: name,
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
-        phone: phone,
-        avatarId: avatarId,
-        );
-    }
+      name: name,
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+      phone: phone,
+      avatarId: avatarId,
+    );
+  }
 }
