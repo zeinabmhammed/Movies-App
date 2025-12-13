@@ -48,6 +48,8 @@ class MovieDetailsScreen extends StatelessWidget {
                                   (s) => {
                                     "image": s.mediumCoverImage ?? '',
                                     "rating": s.rating ?? 0,
+                                    "id": s.id,
+                                    "title": s.title,
                                   },
                                 )
                                 .toList(),
