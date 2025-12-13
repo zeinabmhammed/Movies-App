@@ -1,4 +1,4 @@
-import 'package:movies_app/domain/models/torrent_model.dart';
+import '../../api/model/response/MoviesResponse/torrents.dart';
 
 class Movie {
   final int id;
@@ -13,7 +13,7 @@ class Movie {
   final String? smallCoverImage;
   final String? mediumCoverImage;
   final String? largeCoverImage;
-  final List<TorrentModel> torrents;
+  final List<Torrents>? torrents;
 
   Movie({
     required this.id,
@@ -29,5 +29,25 @@ class Movie {
     this.mediumCoverImage,
     this.largeCoverImage,
     this.torrents = const [],
+  });
+}
+
+class TorrentModel {
+  final String? url;
+  final String? hash;
+  final String? quality;
+  final String? type;
+  final String? size;
+  final int? seeds;
+  final int? peers;
+
+  TorrentModel({
+    this.url,
+    this.hash,
+    this.quality,
+    this.type,
+    this.size,
+    this.seeds,
+    this.peers,
   });
 }

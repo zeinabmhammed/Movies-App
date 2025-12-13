@@ -1,5 +1,5 @@
-import 'package:movies_app/core/appAssets/app_images.dart';
 
+import '../../core/resources/appAssets/app_images.dart';
 import '../../domain/entities/onboarding_entity.dart';
 
 abstract class OnboardingDataSource {

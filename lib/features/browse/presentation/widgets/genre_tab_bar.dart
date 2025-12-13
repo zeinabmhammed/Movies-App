@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/resources/color_manger.dart';
+import '../../../../core/resources/responsive/responsive.dart';
 import '../../../../core/resources/styles_manger.dart';
-import '../../../../core/responsive/responsive.dart';
 
 class GenreTabBar extends StatelessWidget {
   final TabController tabController;

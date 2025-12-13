@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/routes_manger/routes.dart';
 import 'package:movies_app/features/main_layout/main_layout.dart';
-import 'package:movies_app/features/movie_details/presentation/screens/movie_details_screen.dart';
+import 'package:movies_app/features/movie_details/presentation/screen/movie_details_screen.dart';
 
 class RoutesGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -10,7 +10,14 @@ class RoutesGenerator {
         return MaterialPageRoute(builder: (_) => const MainLayout());
 
       case Routes.movieDetailsRoute:
-        return MaterialPageRoute(builder: (_) => const MovieDetailsScreen());
+        if (settings.arguments is int) {
+          final movieId = settings.arguments as int;
+          return MaterialPageRoute(
+            builder: (_) => MovieDetailsScreen(movieId: movieId),
+          );
+        } else {
+          return unDefinedRoute();
+        }
 
       default:
         return unDefinedRoute();

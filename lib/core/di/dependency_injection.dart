@@ -41,13 +41,14 @@ import '../../domain/usecases/watchListUsecases/get_watchList.dart';
 import '../../domain/usecases/watchListUsecases/remove_from_watchList.dart';
 import '../../features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import '../../features/browse/presentation/bloc/movie_browse_bloc.dart';
+import '../../features/main_layout/profile/presentation/bloc/deleteProfile/delete_profile_bloc.dart';
+import '../../features/main_layout/profile/presentation/bloc/history/history_bloc.dart';
+import '../../features/main_layout/profile/presentation/bloc/updateProfile/update_profile_bloc.dart';
+import '../../features/main_layout/profile/presentation/bloc/userProfile/user_profile_bloc.dart';
+import '../../features/main_layout/profile/presentation/bloc/watchList/watch_list_bloc.dart';
+import '../../features/main_layout/search/presentation/bloc/movie_search_bloc.dart';
 import '../../features/onborading/presentation/bloc/blocs/onboarding_bloc.dart';
-import '../../features/profile/presentation/bloc/deleteProfile/delete_profile_bloc.dart';
-import '../../features/profile/presentation/bloc/history/history_bloc.dart';
-import '../../features/profile/presentation/bloc/updateProfile/update_profile_bloc.dart';
-import '../../features/profile/presentation/bloc/userProfile/user_profile_bloc.dart';
-import '../../features/profile/presentation/bloc/watchList/watch_list_bloc.dart';
-import '../../features/search/presentation/bloc/movie_search_bloc.dart';
+
 
 final sl = GetIt.instance;
 

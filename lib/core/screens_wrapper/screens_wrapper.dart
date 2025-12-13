@@ -2,18 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/features/browse/presentation/bloc/movie_browse_bloc.dart';
 import 'package:movies_app/features/browse/presentation/screens/movie_browse_screen.dart';
-import 'package:movies_app/features/profile/presentation/bloc/deleteProfile/delete_profile_bloc.dart';
-import 'package:movies_app/features/profile/presentation/bloc/userProfile/user_profile_bloc.dart';
-import '../../features/profile/presentation/bloc/history/history_bloc.dart';
-import '../../features/profile/presentation/bloc/history/history_event.dart';
-import '../../features/profile/presentation/bloc/updateProfile/update_profile_bloc.dart';
-import '../../features/profile/presentation/bloc/userProfile/user_profile_event.dart';
-import '../../features/profile/presentation/bloc/watchList/watch_list_bloc.dart';
-import '../../features/profile/presentation/bloc/watchList/watch_list_event.dart';
-import '../../features/profile/presentation/screens/update_profile.dart';
-import '../../features/profile/presentation/screens/user_profile_screen.dart';
-import '../../features/search/presentation/bloc/movie_search_bloc.dart';
-import '../../features/search/presentation/screens/movie_search_screen.dart';
+import 'package:movies_app/features/movie_details/bloc/movie_details_bloc.dart';
+import 'package:movies_app/features/movie_details/bloc/movie_details_event.dart';
+import 'package:movies_app/features/movie_details/presentation/screen/movie_details_screen.dart';
+import '../../features/main_layout/home/bloc/movies_bloc.dart';
+import '../../features/main_layout/home/bloc/movies_event.dart';
+import '../../features/main_layout/home/presentation/screens/home_screen.dart';
+import '../../features/main_layout/main_layout.dart';
+import '../../features/main_layout/profile/presentation/bloc/deleteProfile/delete_profile_bloc.dart';
+import '../../features/main_layout/profile/presentation/bloc/history/history_bloc.dart';
+import '../../features/main_layout/profile/presentation/bloc/history/history_event.dart';
+import '../../features/main_layout/profile/presentation/bloc/updateProfile/update_profile_bloc.dart';
+import '../../features/main_layout/profile/presentation/bloc/userProfile/user_profile_bloc.dart';
+import '../../features/main_layout/profile/presentation/bloc/userProfile/user_profile_event.dart';
+import '../../features/main_layout/profile/presentation/bloc/watchList/watch_list_bloc.dart';
+import '../../features/main_layout/profile/presentation/bloc/watchList/watch_list_event.dart';
+import '../../features/main_layout/profile/presentation/screens/update_profile.dart';
+import '../../features/main_layout/profile/presentation/screens/user_profile_screen.dart';
+import '../../features/main_layout/search/presentation/bloc/movie_search_bloc.dart';
+import '../../features/main_layout/search/presentation/screens/movie_search_screen.dart';
 import '../di/dependency_injection.dart';
 
 class MovieBrowseWrapper extends StatelessWidget {
@@ -77,6 +84,22 @@ class UpdateProfileWrapper extends StatelessWidget {
         ),
       ],
       child: UpdateProfileScreen(),
+    );
+  }
+}
+class MainLayoutWrapper extends StatelessWidget {
+  const MainLayoutWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => sl<MoviesBloc>()..add(FetchMoviesEvent())),
+        BlocProvider(create: (_) => sl<MovieSearchBloc>()),
+        BlocProvider(create: (_) => sl<MovieBrowseBloc>()),
+        BlocProvider(create: (_) => sl<UserProfileBloc>()..add(GetProfileEvent())),
+      ],
+      child: const MainLayout(),
     );
   }
 }

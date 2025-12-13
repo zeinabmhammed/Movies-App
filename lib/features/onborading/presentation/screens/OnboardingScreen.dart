@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/core/commonWidgets/custom_button.dart';
 import 'package:movies_app/domain/entities/onboarding_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/resources/color_manger.dart';
-import '../../../../core/responsive/responsive.dart';
+import '../../../../core/resources/commonWidgets/custom_button.dart';
+import '../../../../core/resources/responsive/responsive.dart';
 import '../../../../core/routes_manger/routes.dart';
 import '../../../../data/datasources/onboarding_local_data_source.dart';
 

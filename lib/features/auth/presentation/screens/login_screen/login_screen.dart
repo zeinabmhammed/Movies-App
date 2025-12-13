@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/core/appAssets/app_images.dart';
-import 'package:movies_app/core/commonWidgets/custom_button.dart';
-import 'package:movies_app/core/responsive/responsive.dart';
-import '../../../../../core/appAssets/app_icons.dart';
-import '../../../../../core/commonWidgets/custom_textField.dart';
+import '../../../../../core/resources/appAssets/app_icons.dart';
+import '../../../../../core/resources/appAssets/app_images.dart';
 import '../../../../../core/resources/color_manger.dart';
+import '../../../../../core/resources/commonWidgets/custom_button.dart';
+import '../../../../../core/resources/commonWidgets/custom_textField.dart';
+import '../../../../../core/resources/responsive/responsive.dart';
 import '../../../../../core/routes_manger/routes.dart';
-import '../../../../profile/presentation/bloc/userProfile/user_profile_bloc.dart';
-import '../../../../profile/presentation/bloc/userProfile/user_profile_event.dart';
 import '../../bloc/auth_bloc/auth_bloc.dart';
 import '../../bloc/auth_bloc/auth_event.dart';
 import '../../bloc/auth_bloc/auth_state.dart';
@@ -40,8 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
             print("AuthBloc state changed: $state");
             if (state is AuthSuccess) {
 
-              context.read<UserProfileBloc>().add(GetProfileEvent());
-              Navigator.pushReplacementNamed(context, Routes.profileRoute);
+              Navigator.pushReplacementNamed(context, Routes.mainRoute);
 
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -244,7 +241,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     text: "   Login with Google",
-                    onTap: () {},
+                    onTap: () {
+                    },
                   ),
 
                   const SizedBox(height: 25),

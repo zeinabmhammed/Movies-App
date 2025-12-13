@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/responsive/responsive.dart';
-import '../../../search/presentation/widgets/movie_card.dart';
+import '../../../../core/resources/responsive/responsive.dart';
+import '../../../main_layout/search/presentation/widgets/movie_card.dart';
 import '../bloc/movie_browse_bloc.dart';
 import '../bloc/movie_browse_event.dart';
 import '../bloc/movie_browse_state.dart';

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/core/appAssets/app_images.dart';
-import '../../../../../core/commonWidgets/custom_button.dart';
-import '../../../../../core/commonWidgets/custom_textField.dart';
+import '../../../../../core/resources/appAssets/app_icons.dart';
+import '../../../../../core/resources/appAssets/app_images.dart';
 import '../../../../../core/resources/color_manger.dart';
-import '../../../../../core/responsive/responsive.dart';
-import '../../../../../core/appAssets/app_icons.dart';
+import '../../../../../core/resources/commonWidgets/custom_button.dart';
+import '../../../../../core/resources/commonWidgets/custom_textField.dart';
+import '../../../../../core/resources/responsive/responsive.dart';
+
 import '../../../../../core/routes_manger/routes.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {

@@ -1,4 +1,5 @@
-import 'package:movies_app/api/models/torrent_dto.dart';
+
+import 'package:movies_app/api/model/dto/movies_details_dto.dart';
 
 class MovieDto {
   final int id;

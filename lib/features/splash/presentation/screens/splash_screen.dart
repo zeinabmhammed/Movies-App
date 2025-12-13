@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/core/appAssets/app_images.dart';
-import '../../../../../core/responsive/responsive.dart';
+import '../../../../core/resources/appAssets/app_images.dart';
 import '../../../../core/resources/color_manger.dart';
+import '../../../../core/resources/responsive/responsive.dart';
 import '../../../../core/routes_manger/routes.dart';
 
 class SplashScreen extends StatefulWidget {
