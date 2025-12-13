@@ -6,7 +6,7 @@ import 'package:movies_app/features/main_layout/home/bloc/movies_state.dart';
 import 'package:movies_app/features/main_layout/home/presentation/widgets/top_carousel.dart';
 import 'package:movies_app/features/main_layout/home/presentation/widgets/action_section.dart';
 import 'package:movies_app/features/main_layout/home/presentation/widgets/horizontal_movie_list.dart';
-import 'package:movies_app/features/movie_details/presentation/screens/movie_details_screen.dart';
+import 'package:movies_app/features/movie_details/presentation/screen/movie_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
