@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:movies_app/api/api_manger.dart';
-import 'package:movies_app/data/datasource/movies_remote_datasource.dart';
+import 'package:movies_app/data/datasources/movies_remote_datasource.dart';
 import '../../domain/models/movie.dart';
 
 @Injectable(as: MoviesRemoteDataSource)

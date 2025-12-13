@@ -16,7 +16,7 @@ import 'package:movies_app/features/movie_details/presentation/widgets/similar_m
 
 class MovieDetailsScreen extends StatelessWidget {
   final int movieId;
-  const MovieDetailsScreen({Key? key, required this.movieId}) : super(key: key);
+   MovieDetailsScreen({Key? key, required this.movieId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

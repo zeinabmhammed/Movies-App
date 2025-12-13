@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movies_app/core/resources/assets_manger.dart';
 import 'package:movies_app/core/resources/color_manger.dart';
-import 'package:movies_app/core/widget/custom_elevated_button.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/rating_section.dart';
 import 'package:movies_app/domain/models/movie_details.dart';
+
+import '../../../../core/resources/appAssets/app_images.dart';
+import '../../../../core/resources/commonWidgets/custom_elevated_button.dart';
+
 
 class PosterBanner extends StatelessWidget {
   final MovieDetails movie;

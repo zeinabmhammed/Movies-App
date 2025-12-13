@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movies_app/core/resources/assets_manger.dart';
+import '../../../../../core/resources/appAssets/app_images.dart';
 
 class RatingBadge extends StatelessWidget {
   final String rating;

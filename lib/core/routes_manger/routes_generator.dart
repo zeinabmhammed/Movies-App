@@ -9,7 +9,7 @@ class RoutesGenerator {
       case Routes.mainRoute:
         return MaterialPageRoute(builder: (_) => const MainLayout());
 
-      case Routes.moviesDetailsRoute:
+      case Routes.movieDetailsRoute:
         if (settings.arguments is int) {
           final movieId = settings.arguments as int;
           return MaterialPageRoute(

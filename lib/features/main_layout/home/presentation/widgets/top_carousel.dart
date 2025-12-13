@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:movies_app/core/resources/assets_manger.dart';
 import 'package:movies_app/core/resources/color_manger.dart';
 import 'package:movies_app/domain/models/movie.dart';
+import '../../../../../core/resources/appAssets/app_images.dart';
 import 'rating_badge.dart';
 
 class TopCarousel extends StatefulWidget {

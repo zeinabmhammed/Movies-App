@@ -1,9 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movies_app/core/resources/assets_manger.dart';
 import 'package:movies_app/core/resources/color_manger.dart';
+import 'package:movies_app/core/screens_wrapper/screens_wrapper.dart';
 import 'package:movies_app/features/main_layout/home/presentation/screens/home_screen.dart';
+
+import '../../core/resources/appAssets/app_images.dart';
+
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -17,9 +20,9 @@ class _MainLayoutState extends State<MainLayout> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const Center(child: Text('Search', style: TextStyle(fontSize: 24))),
-    const Center(child: Text('Explore', style: TextStyle(fontSize: 24))),
-    const Center(child: Text('Profile', style: TextStyle(fontSize: 24))),
+    const MovieSearchWrapper(),
+    const MovieBrowseWrapper(),
+    const ProfileWrapper(),
   ];
 
   @override

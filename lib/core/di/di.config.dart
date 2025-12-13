@@ -18,19 +18,19 @@ import '../../api/datasource/movies_details_remote_datasource_impl.dart'
 import '../../api/datasource/movies_suggestions_remote_datasource_impl.dart'
     as _i544;
 import '../../api/datasource/MoviesRemoteDataSourceImpl.dart' as _i739;
-import '../../data/datasource/movies_details_remote_datasource.dart' as _i497;
-import '../../data/datasource/movies_remote_datasource.dart' as _i88;
-import '../../data/datasource/movies_suggustions_remote_datasource.dart'
+import '../../data/datasources/movies_details_remote_datasource.dart' as _i497;
+import '../../data/datasources/movies_remote_datasource.dart' as _i88;
+import '../../data/datasources/movies_suggustions_remote_datasource.dart'
     as _i317;
-import '../../data/repos/movies_details_repository_impl.dart' as _i756;
-import '../../data/repos/movies_repository_impl.dart' as _i493;
-import '../../data/repos/movies_suggustions_repository_impl.dart' as _i549;
-import '../../domain/repos/movies_details_repository.dart' as _i238;
-import '../../domain/repos/movies_repository.dart' as _i768;
-import '../../domain/repos/movies_suggestions_repository.dart' as _i359;
-import '../../domain/useCase/get_movies_details_use_case.dart' as _i724;
-import '../../domain/useCase/get_movies_suggestions_use_case.dart' as _i69;
-import '../../domain/useCase/get_movies_use_case.dart' as _i494;
+import '../../data/repositories/movies_details_repository_impl.dart' as _i756;
+import '../../data/repositories/movies_repository_impl.dart' as _i493;
+import '../../data/repositories/movies_suggustions_repository_impl.dart' as _i549;
+import '../../domain/repositories/movies_details_repository.dart' as _i238;
+import '../../domain/repositories/movies_repository.dart' as _i768;
+import '../../domain/repositories/movies_suggestions_repository.dart' as _i359;
+import '../../domain/usecases/get_movies_details_use_case.dart' as _i724;
+import '../../domain/usecases/get_movies_suggestions_use_case.dart' as _i69;
+import '../../domain/usecases/get_movies_use_case.dart' as _i494;
 import '../../features/main_layout/home/bloc/movies_bloc.dart' as _i509;
 import '../../features/movie_details/bloc/movie_details_bloc.dart' as _i1059;
 

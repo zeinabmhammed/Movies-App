@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movies_app/domain/useCase/get_movies_details_use_case.dart';
-import 'package:movies_app/domain/useCase/get_movies_suggestions_use_case.dart';
+import 'package:movies_app/domain/usecases/get_movies_details_use_case.dart';
+import 'package:movies_app/domain/usecases/get_movies_suggestions_use_case.dart';
 import 'package:movies_app/features/movie_details/bloc/movie_details_event.dart';
 import 'package:movies_app/features/movie_details/bloc/movie_details_state.dart';
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movies_app/core/resources/assets_manger.dart';
 import 'package:movies_app/core/resources/color_manger.dart';
+
+import '../../../../core/resources/appAssets/app_images.dart';
+
 
 class RatingSection extends StatelessWidget {
   final double rating;

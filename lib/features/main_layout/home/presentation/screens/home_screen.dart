@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/resources/color_manger.dart';
+import 'package:movies_app/core/screens_wrapper/screens_wrapper.dart';
 import 'package:movies_app/features/main_layout/home/bloc/movies_bloc.dart';
 import 'package:movies_app/features/main_layout/home/bloc/movies_state.dart';
 import 'package:movies_app/features/main_layout/home/presentation/widgets/top_carousel.dart';
@@ -48,7 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
-                  ActionSection(title: "Action", onSeeMore: () {}),
+                  ActionSection(
+                    title: "Action",
+                    onSeeMore: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => MovieBrowseWrapper()),
+                      );
+                    },
+                  ),
                   const SizedBox(height: 20),
 
                   HorizontalMovieList(
