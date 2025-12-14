@@ -1,3 +1,5 @@
+import '../entities/movie.dart';
+
 class MovieDetails {
   final int id;
   final String url;
@@ -77,4 +79,17 @@ class Torrent {
     required this.quality,
     required this.type,
   });
+}
+
+extension MovieDetailsMapper on MovieDetails {
+  Movie toMovie() {
+    return Movie(
+      id: id,
+      title: title,
+      year: year,
+      rating: rating,
+      posterPath: largeCoverImage, // أنسب صورة للـ WatchList
+      genres: genres,
+    );
+  }
 }

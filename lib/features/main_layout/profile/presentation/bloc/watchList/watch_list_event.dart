@@ -10,3 +10,9 @@ class RemoveFromWatchListEvent extends WatchListEvent {
 class LoadWatchListEvent extends WatchListEvent {}
 
 class GetWatchListCount extends WatchListEvent {}
+
+
+class AddToWatchListEvent extends WatchListEvent {
+  final Movie movie;
+  AddToWatchListEvent(this.movie);
+}

@@ -30,7 +30,8 @@ class WatchListWidget extends StatelessWidget {
           return GridView.builder(
             padding: EdgeInsets.all(resp.scaleWidth(8)),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: resp.getGridCount(mobile: 2, tablet: 3, desktop: 4),
+              crossAxisCount: resp.getGridCount(
+                  mobile: 2, tablet: 3, desktop: 4),
               mainAxisSpacing: resp.scaleHeight(16),
               crossAxisSpacing: resp.scaleWidth(16),
               childAspectRatio: resp.gridAspectRatio(),
@@ -38,14 +39,19 @@ class WatchListWidget extends StatelessWidget {
             itemCount: movies.length,
             itemBuilder: (context, index) {
               final movie = movies[index];
-              return  MovieCard(movie: movie);
+              return MovieCard(movie: movie);
             },
           );
-        } else if (state is WatchListError) {
-          return Center(child: Text(state.message));
+        } else if (state is WatchListAlreadyExists) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Movie already in Watch List")),
+            );
+          });
+          return const SizedBox();
         }
         return const SizedBox();
-      },
+      }
     );
   }
 }

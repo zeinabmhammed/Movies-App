@@ -8,6 +8,21 @@ class WatchListRemoteDataSourceImpl implements WatchListRemoteDataSource {
   WatchListRemoteDataSourceImpl(this.api);
 
   @override
+  Future<void> addToWatchList(Movie movie) async {
+    try {
+      await api.addFavoriteMovie(
+        movie.id,
+        movie.title,
+        movie.rating,
+        movie.posterPath,
+        movie.year,
+      );
+    } catch (e) {
+      throw Exception("Failed to add movie to watch list: $e");
+    }
+  }
+
+  @override
   Future<void> removeFromWatchList(Movie movie) async {
     try{
       await api.deleteFavoriteMovie(movie.id);

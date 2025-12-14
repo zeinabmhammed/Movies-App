@@ -181,4 +181,30 @@ class ApiManager {
       throw Exception("Failed to delete favorite movie: $e");
     }
   }
+
+  Future<void> addFavoriteMovie(
+    int movieId,
+    String name,
+    double rating,
+    String imageURL,
+    int year,
+  ) async {
+    final token = await _getToken();
+    await _dioMovies.post(
+      ApiConfig.addFavoriteMovie,
+      data: {
+        "movieId": movieId,
+        "name": name,
+        "rating": rating,
+        "imageURL": imageURL,
+        "year": year.toString(),
+      },
+      options: Options(
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+        },
+      ),
+    );
+  }
 }
