@@ -20,3 +20,4 @@ class WatchListError extends WatchListState {
   final String message;
   WatchListError(this.message);
 }
+class WatchListAlreadyExists extends WatchListState {}

@@ -8,6 +8,11 @@ class WatchListRepositoryImpl implements WatchListRepository {
   WatchListRepositoryImpl(this.watchListRemoteDataSource);
 
   @override
+  Future<void> addToWatchList(Movie movie) {
+    return watchListRemoteDataSource.addToWatchList(movie);
+  }
+
+  @override
   Future<void> removeFromWatchList(Movie movie) {
     return watchListRemoteDataSource.removeFromWatchList(movie);
   }

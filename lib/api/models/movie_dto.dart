@@ -1,5 +1,6 @@
-
 import 'package:movies_app/api/model/dto/movies_details_dto.dart';
+
+import '../../domain/entities/movie.dart';
 
 class MovieDto {
   final int id;
@@ -24,16 +25,26 @@ class MovieDto {
 
   factory MovieDto.fromJson(Map<String, dynamic> json) {
     return MovieDto(
-      id: json['id'] ?? 0,
-      title: json['title'] ?? '',
-      year: json['year'] ?? 0,
-      rating: (json['rating'] ?? 0).toDouble(),
-      genres: (json['genres'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
-      summary: json['summary'] ?? '',
-      mediumCoverImage: json['medium_cover_image'] ?? '',
-      torrents: (json['torrents'] as List<dynamic>? ?? []).map((t) => TorrentDto.fromJson(t)).toList(),
+      id: int.tryParse(json['movieId'].toString()) ?? 0,
+      title: json['name'] ?? '',
+      year: int.tryParse(json['year'].toString()) ?? 0,
+      rating: (json['rating'] is num)
+          ? (json['rating'] as num).toDouble()
+          : double.tryParse(json['rating'].toString()) ?? 0.0,
+      genres: [],
+      summary: '',
+      mediumCoverImage: json['imageURL'] ?? '',
+      torrents: [],
     );
   }
+  Movie toEntity() => Movie(
+    id: id,
+    title: title,
+    year: year,
+    rating: rating,
+    posterPath: mediumCoverImage,
+    genres: genres,
+  );
 
 // mapper to bloc entity (we'll implement entity next)
 }

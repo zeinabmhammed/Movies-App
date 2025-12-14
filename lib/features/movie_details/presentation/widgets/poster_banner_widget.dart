@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies_app/core/resources/color_manger.dart';
+import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/rating_section.dart';
 import 'package:movies_app/domain/models/movie_details.dart';
 
 import '../../../../core/resources/appAssets/app_images.dart';
 import '../../../../core/resources/commonWidgets/custom_elevated_button.dart';
-
+import '../../../main_layout/profile/presentation/bloc/watchList/watch_list_bloc.dart';
+import '../../../main_layout/profile/presentation/bloc/watchList/watch_list_event.dart';
 
 class PosterBanner extends StatelessWidget {
   final MovieDetails movie;
@@ -60,7 +63,14 @@ class PosterBanner extends StatelessWidget {
                         color: Colors.white,
                         size: 35,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<WatchListBloc>().add(
+                          AddToWatchListEvent(movie.toMovie()),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Added to Watch List")),
+                        );
+                      },
                     ),
                   ],
                 ),

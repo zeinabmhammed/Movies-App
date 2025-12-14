@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/resources/responsive/responsive.dart';
 import '../../../main_layout/search/presentation/widgets/movie_card.dart';
+import '../../../movie_details/presentation/screen/movie_details_screen.dart';
 import '../bloc/movie_browse_bloc.dart';
 import '../bloc/movie_browse_event.dart';
 import '../bloc/movie_browse_state.dart';
@@ -68,19 +69,33 @@ class _MovieBrowseScreenState extends State<MovieBrowseScreen>
                     onGenreSelected: _onGenreSelected,
                   ),
                   Expanded(
-                    child: GridView.builder(
-                      padding: EdgeInsets.only(top: responsive.scaleHeight(20)),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: responsive.getGridCount(),
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 8,
-                        childAspectRatio: responsive.gridAspectRatio(),
-                      ),
-                      itemCount: state.filteredMovies.length,
-                      itemBuilder: (context, index) {
-                        final movie = state.filteredMovies[index];
-                        return MovieCard(movie: movie);
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => MovieDetailsScreen(
+                              movieId: state.filteredMovies[0].id,
+                            ),
+                          ),
+                        );
                       },
+                      child: GridView.builder(
+                        padding: EdgeInsets.only(
+                          top: responsive.scaleHeight(20),
+                        ),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: responsive.getGridCount(),
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 8,
+                          childAspectRatio: responsive.gridAspectRatio(),
+                        ),
+                        itemCount: state.filteredMovies.length,
+                        itemBuilder: (context, index) {
+                          final movie = state.filteredMovies[index];
+                          return MovieCard(movie: movie);
+                        },
+                      ),
                     ),
                   ),
                 ],

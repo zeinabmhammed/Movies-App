@@ -14,13 +14,23 @@ import 'package:movies_app/features/movie_details/presentation/widgets/cast_sect
 import 'package:movies_app/features/movie_details/presentation/widgets/genres_section.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/similar_movies_section.dart';
 
+import '../../../main_layout/profile/presentation/bloc/watchList/watch_list_bloc.dart';
+import '../../../main_layout/profile/presentation/bloc/watchList/watch_list_event.dart';
+
 class MovieDetailsScreen extends StatelessWidget {
   final int movieId;
    MovieDetailsScreen({Key? key, required this.movieId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<MovieDetailsBloc>()..add(FetchMovieDetails(movieId)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<MovieDetailsBloc>()..add(FetchMovieDetails(movieId)),
+        ),
+        BlocProvider(
+          create: (_) => getIt<WatchListBloc>()..add(LoadWatchListEvent()),
+        ),
+      ],
       child: Scaffold(
         backgroundColor: ColorManager.black,
         body: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(

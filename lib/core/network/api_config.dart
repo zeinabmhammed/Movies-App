@@ -13,6 +13,7 @@ abstract class ApiConfig {
 
   static final String getFavoriteMovies = "$profileBaseUrl/favorites/all";
   static final String deleteFavoriteMovie = "$profileBaseUrl/favorites/remove";
+  static final String addFavoriteMovie = "$profileBaseUrl/favorites/add";
 
   static const int connectTimeout = 10000;
   static const int receiveTimeout = 10000;

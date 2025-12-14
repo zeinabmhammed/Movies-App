@@ -37,6 +37,7 @@ import '../../domain/usecases/profileUsecases/get_user_profile.dart';
 import '../../domain/usecases/profileUsecases/update_profile.dart';
 import '../../domain/usecases/register_uescase.dart';
 import '../../domain/usecases/search_movies.dart';
+import '../../domain/usecases/watchListUsecases/add_to_watchList_useCase.dart';
 import '../../domain/usecases/watchListUsecases/get_watchList.dart';
 import '../../domain/usecases/watchListUsecases/remove_from_watchList.dart';
 import '../../features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
@@ -119,6 +120,7 @@ Future<void> init() async {
   sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
 
   // Use Cases
+  sl.registerLazySingleton(() => AddToWatchListUseCase(sl()));
   sl.registerLazySingleton(() => RemoveFromWatchListUseCase(sl()));
   sl.registerLazySingleton(() => GetWatchListUseCase(sl()));
   sl.registerLazySingleton(() => AddToHistoryUseCase(sl()));
@@ -131,7 +133,7 @@ Future<void> init() async {
 
   // Blocs
   sl.registerFactory(
-    () => WatchListBloc(removeFromWatchList: sl(), getWatchList: sl()),
+    () => WatchListBloc(removeFromWatchList: sl(), getWatchList: sl() , addToWatchList: sl()),
   );
   sl.registerFactory(() => MovieSearchBloc(sl()));
   sl.registerFactory(() => MovieBrowseBloc(sl()));
