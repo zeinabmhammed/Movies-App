@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../core/resources/appAssets/app_images.dart';
 import '../../../../../core/resources/color_manger.dart';
 import '../../../../../core/routes_manger/routes.dart';
@@ -29,6 +30,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('history');
+
     context.read<HistoryBloc>().add(LoadHistoryEvent());
     context.read<WatchListBloc>().add(LoadWatchListEvent());
     context.read<UserProfileBloc>().add(GetProfileEvent());
@@ -106,6 +114,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             setState(() {
                               showWatchList = showWatch;
                             });
+                            if (!showWatch) {
+                              context.read<HistoryBloc>().add(
+                                LoadHistoryEvent(),
+                              );
+                            } else {
+                              context.read<WatchListBloc>().add(
+                                LoadWatchListEvent(),
+                              );
+                            }
                           },
                         );
                       },
