@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies_app/core/resources/color_manger.dart';
-import 'package:movies_app/domain/entities/movie.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/rating_section.dart';
 import 'package:movies_app/domain/models/movie_details.dart';
 
@@ -10,6 +9,7 @@ import '../../../../core/resources/appAssets/app_images.dart';
 import '../../../../core/resources/commonWidgets/custom_elevated_button.dart';
 import '../../../main_layout/profile/presentation/bloc/watchList/watch_list_bloc.dart';
 import '../../../main_layout/profile/presentation/bloc/watchList/watch_list_event.dart';
+import '../../../main_layout/profile/presentation/bloc/watchList/watch_list_state.dart';
 
 class PosterBanner extends StatelessWidget {
   final MovieDetails movie;
@@ -50,25 +50,53 @@ class PosterBanner extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
                         size: 35,
                       ),
                       onPressed: () => Navigator.pop(context),
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.bookmark_border_sharp,
-                        color: Colors.white,
-                        size: 35,
-                      ),
-                      onPressed: () {
-                        context.read<WatchListBloc>().add(
-                          AddToWatchListEvent(movie.toMovie()),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Added to Watch List")),
+
+                    BlocBuilder<WatchListBloc, WatchListState>(
+                      builder: (context, state) {
+                        bool isSaved = false;
+
+                        if (state is WatchListLoaded) {
+                          isSaved = state.movies.any((m) => m.id == movie.id);
+                        }
+
+                        if (state is WatchListStatus) {
+                          isSaved = state.isSaved;
+                        }
+
+                        return IconButton(
+                          icon: Icon(
+                            isSaved ? Icons.bookmark : Icons.bookmark_border,
+                            color: isSaved ? Colors.yellow : Colors.white,
+                            size: 35,
+                          ),
+                          onPressed: () {
+                            final bloc = context.read<WatchListBloc>();
+
+                            if (isSaved) {
+                              bloc.add(
+                                RemoveFromWatchListEvent(movie.toMovie()),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Removed from Watch List"),
+                                ),
+                              );
+                            } else {
+                              bloc.add(AddToWatchListEvent(movie.toMovie()));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Added to Watch List"),
+                                ),
+                              );
+                            }
+                          },
                         );
                       },
                     ),
@@ -87,7 +115,7 @@ class PosterBanner extends StatelessWidget {
                           height: 97,
                         ),
                       ),
-                      SizedBox(height: 175),
+                      const SizedBox(height: 175),
 
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -101,7 +129,7 @@ class PosterBanner extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             movie.year.toString(),
                             textAlign: TextAlign.center,
@@ -113,7 +141,7 @@ class PosterBanner extends StatelessWidget {
                         ],
                       ),
 
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
 
                       CustomElevatedButton(
                         text: 'Watch',

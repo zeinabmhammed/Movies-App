@@ -41,14 +41,18 @@ class MovieDto {
   }
 
   MovieDto.fromJson(dynamic json) {
-    id = json['id'];
+    id = json['id'] ??
+        int.tryParse(json['movieId']?.toString() ?? '') ??
+        0;
     url = json['url'];
     imdbCode = json['imdb_code'];
-    title = json['title'];
+    title = json['title'] ?? json['name'] ?? '';
     titleEnglish = json['title_english'];
     titleLong = json['title_long'];
     slug = json['slug'];
-    year = json['year'] is String ? int.tryParse(json['year']) : json['year'];
+    year = json['year'] is String
+        ? int.tryParse(json['year'])
+        : json['year'];
     rating = json['rating'] is String
         ? num.tryParse(json['rating'])
         : json['rating'];
@@ -65,7 +69,10 @@ class MovieDto {
     backgroundImage = json['background_image'];
     backgroundImageOriginal = json['background_image_original'];
     smallCoverImage = json['small_cover_image'];
-    mediumCoverImage = json['medium_cover_image'] ?? json['imageURL'] ?? '';
+    mediumCoverImage =
+        json['medium_cover_image'] ??
+            json['imageURL'] ??
+            '';
     largeCoverImage = json['large_cover_image'];
     state = json['state'];
     dateUploaded = json['date_uploaded'];

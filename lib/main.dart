@@ -10,6 +10,8 @@ import 'features/auth/presentation/screens/register_screen/register_screen.dart'
 import 'core/routes_manger/routes.dart';
 import 'core/screens_wrapper/screens_wrapper.dart';
 import 'features/main_layout/profile/presentation/bloc/userProfile/user_profile_bloc.dart';
+import 'features/main_layout/profile/presentation/bloc/watchList/watch_list_bloc.dart';
+import 'features/main_layout/profile/presentation/bloc/watchList/watch_list_event.dart';
 import 'features/onborading/presentation/screens/OnboardingScreen.dart';
 import 'package:movies_app/core/di/di.dart';
 
@@ -30,6 +32,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthBloc>(create: (_) => sl<AuthBloc>()),
         BlocProvider<UserProfileBloc>(create: (_) => sl<UserProfileBloc>()),
+        BlocProvider<WatchListBloc>(
+          create: (_) => sl<WatchListBloc>()..add(LoadWatchListEvent()),
+        ),
       ],
       child: MaterialApp(
         title: 'Movies App',

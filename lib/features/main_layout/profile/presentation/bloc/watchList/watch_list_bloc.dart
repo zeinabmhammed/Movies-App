@@ -19,8 +19,7 @@ class WatchListBloc extends Bloc<WatchListEvent, WatchListState> {
     on<RemoveFromWatchListEvent>((event, emit) async {
       try {
         await removeFromWatchList(event.movie);
-        final movies = await getWatchList();
-        emit(WatchListLoaded(movies));
+        emit(WatchListStatus(false));
       } catch (e) {
         emit(WatchListError("Failed to remove movie: ${e.toString()}"));
       }
@@ -48,9 +47,12 @@ class WatchListBloc extends Bloc<WatchListEvent, WatchListState> {
     on<AddToWatchListEvent>((event, emit) async {
       try {
         await addToWatchList(event.movie);
-        final movies = await getWatchList();
-        emit(WatchListLoaded(movies));
+        emit(WatchListStatus(true));
       } catch (e) {
+        if (e.toString().contains("409")) {
+          emit(WatchListStatus(true));
+          return;
+        }
         emit(WatchListError("Failed to add movie: ${e.toString()}"));
       }
     });

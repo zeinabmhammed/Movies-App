@@ -13,22 +13,26 @@ import 'package:movies_app/features/movie_details/presentation/widgets/summary_s
 import 'package:movies_app/features/movie_details/presentation/widgets/cast_section.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/genres_section.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/similar_movies_section.dart';
-
+import '../../../../core/di/dependency_injection.dart';
+import '../../../main_layout/profile/presentation/bloc/history/history_bloc.dart';
+import '../../../main_layout/profile/presentation/bloc/history/history_event.dart';
 import '../../../main_layout/profile/presentation/bloc/watchList/watch_list_bloc.dart';
-import '../../../main_layout/profile/presentation/bloc/watchList/watch_list_event.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   final int movieId;
-   MovieDetailsScreen({Key? key, required this.movieId}) : super(key: key);
+  MovieDetailsScreen({Key? key, required this.movieId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => getIt<MovieDetailsBloc>()..add(FetchMovieDetails(movieId)),
+          create: (_) =>
+              getIt<MovieDetailsBloc>()..add(FetchMovieDetails(movieId)),
         ),
-        BlocProvider(
-          create: (_) => getIt<WatchListBloc>()..add(LoadWatchListEvent()),
+        BlocProvider.value(value: context.read<WatchListBloc>()),
+
+        BlocProvider<HistoryBloc>(
+          create: (_) => sl<HistoryBloc>()..add(LoadHistoryEvent()),
         ),
       ],
       child: Scaffold(
@@ -39,6 +43,10 @@ class MovieDetailsScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             } else if (state is MovieDetailsLoaded) {
               final MovieDetails movie = state.movieDetails;
+              context.read<HistoryBloc>().add(
+                AddToHistoryEvent(movie.toMovie()),
+              );
+
               final List<MovieSuggestion> suggestions = state.suggestions;
               return SingleChildScrollView(
                 child: Column(

@@ -21,3 +21,8 @@ class WatchListError extends WatchListState {
   WatchListError(this.message);
 }
 class WatchListAlreadyExists extends WatchListState {}
+
+class WatchListStatus extends WatchListState {
+  final bool isSaved;
+  WatchListStatus(this.isSaved);
+}
