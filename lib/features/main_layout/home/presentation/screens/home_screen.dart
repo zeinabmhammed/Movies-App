@@ -48,7 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
-                  const SizedBox(height: 20),
                   ActionSection(
                     title: "Action",
                     onSeeMore: () {
@@ -58,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
 
                   HorizontalMovieList(
                     movies: movies,
@@ -71,13 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
+                  const SizedBox(height: 25),
                 ],
               ),
             );
           } else if (state is MoviesError) {
             return Center(child: Text("Error: ${state.message}"));
           }
-          return const SizedBox.shrink();
+          return const SizedBox(height: 20);
         },
       ),
     );
