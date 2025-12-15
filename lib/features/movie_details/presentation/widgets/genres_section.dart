@@ -8,7 +8,7 @@ class GenresSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (genres.isEmpty) return const Placeholder();
+    if (genres.isEmpty) return const SizedBox();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +28,7 @@ class GenresSection extends StatelessWidget {
           children: genres
               .map(
                 (genre) => Container(
-                  width: 122,
+                  width: 115,
                   height: 36,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -39,6 +39,9 @@ class GenresSection extends StatelessWidget {
                   child: Text(
                     genre,
                     style: TextStyle(color: ColorManager.white, fontSize: 16),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               )
