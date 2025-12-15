@@ -69,33 +69,33 @@ class _MovieBrowseScreenState extends State<MovieBrowseScreen>
                     onGenreSelected: _onGenreSelected,
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => MovieDetailsScreen(
-                              movieId: state.filteredMovies[0].id,
-                            ),
-                          ),
+                    child: GridView.builder(
+                      padding: EdgeInsets.only(
+                        top: responsive.scaleHeight(20),
+                      ),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: responsive.getGridCount(),
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 8,
+                        childAspectRatio: responsive.gridAspectRatio(),
+                      ),
+                      itemCount: state.filteredMovies.length,
+                      itemBuilder: (context, index) {
+                        final movie = state.filteredMovies[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => MovieDetailsScreen(
+                                  movieId: movie.id,
+                                ),
+                              ),
+                            );
+                          },
+                          child: MovieCard(movie: movie),
                         );
                       },
-                      child: GridView.builder(
-                        padding: EdgeInsets.only(
-                          top: responsive.scaleHeight(20),
-                        ),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: responsive.getGridCount(),
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 8,
-                          childAspectRatio: responsive.gridAspectRatio(),
-                        ),
-                        itemCount: state.filteredMovies.length,
-                        itemBuilder: (context, index) {
-                          final movie = state.filteredMovies[index];
-                          return MovieCard(movie: movie);
-                        },
-                      ),
                     ),
                   ),
                 ],
