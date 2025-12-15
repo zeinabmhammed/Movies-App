@@ -24,8 +24,6 @@ class ProfileCounters extends StatelessWidget {
       children: [
         BlocBuilder<WatchListBloc, WatchListState>(
           builder: (context, state) {
-            int count = 0;
-            if (state is WatchListCountLoaded) count = state.count;
             return Text(
               '$watchListCount',
               style: TextStyle(
@@ -37,8 +35,6 @@ class ProfileCounters extends StatelessWidget {
         ),
         BlocBuilder<HistoryBloc, HistoryState>(
           builder: (context, state) {
-            int count = 0;
-            if (state is HistoryCountLoaded) count = state.count;
             return Text(
               '$historyCount',
               style: TextStyle(

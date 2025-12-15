@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../data/models/Movie_dto.dart';
 import '../../entities/movie.dart';
 import '../../repositories/history_repository.dart';
 
@@ -13,12 +15,8 @@ class AddToHistoryUseCase {
 
     List<String> historyList = prefs.getStringList('history') ?? [];
 
-    final movieJson = jsonEncode({
-      'id': movie.id,
-      'title': movie.title,
-      'posterPath': movie.posterPath,
-      'year': movie.year,
-    });
+    final movieDto = MovieDto.fromMovieEntity(movie);
+    final movieJson = jsonEncode(movieDto.toJson());
 
     if (!historyList.contains(movieJson)) {
       historyList.add(movieJson);

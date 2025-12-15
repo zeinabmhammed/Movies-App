@@ -5,6 +5,7 @@ import '../../../../../core/resources/color_manger.dart';
 import '../../../../../core/routes_manger/routes.dart';
 import '../bloc/history/history_bloc.dart';
 import '../bloc/history/history_event.dart';
+import '../bloc/history/history_state.dart';
 import '../bloc/userProfile/user_profile_bloc.dart';
 import '../bloc/userProfile/user_profile_event.dart';
 import '../bloc/userProfile/user_profile_state.dart';
@@ -45,13 +46,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               builder: (context, state) {
                 String userName = "User";
                 String phone = "0000000000";
-                int historyCount = 0;
                 int avatarId = 1;
 
                 if (state is ProfileLoaded) {
                   userName = state.user.name;
                   phone = state.user.phone;
-                  historyCount = state.historyCount;
                   avatarId = state.user.imageId;
                 }
 
@@ -64,44 +63,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return 0;
                   },
                   builder: (context, watchListCount) {
-                    return ProfileHeaderWidget(
-                      userName: userName,
-                      avatarImage:
-                          AppImages.avatarMap[avatarId] ?? AppImages.avatar1,
-                      watchListCount: watchListCount,
-                      historyCount: historyCount,
-                      showWatchList: showWatchList,
-                      onEditProfileTap: () async {
-                        final updated = await Navigator.pushNamed(
-                          context,
-                          Routes.updateProfileRoute,
-                          arguments: {
-                            'userName': userName,
-                            'phone': phone,
-                            'avatarId': avatarId,
+                    return BlocSelector<HistoryBloc, HistoryState, int>(
+                      selector: (historyState) {
+                        if (historyState is HistoryLoaded) {
+                          print(
+                            "HistoryList length: ${historyState.movies.length}",
+                          );
+                          return historyState.movies.length;
+                        }
+                        return 0;
+                      },
+                      builder: (context, historyCount) {
+                        return ProfileHeaderWidget(
+                          userName: userName,
+                          avatarImage:
+                              AppImages.avatarMap[avatarId] ??
+                              AppImages.avatar1,
+                          watchListCount: watchListCount,
+                          historyCount: historyCount,
+                          showWatchList: showWatchList,
+                          onEditProfileTap: () async {
+                            final updated = await Navigator.pushNamed(
+                              context,
+                              Routes.updateProfileRoute,
+                              arguments: {
+                                'userName': userName,
+                                'phone': phone,
+                                'avatarId': avatarId,
+                              },
+                            );
+                            if (updated == true) {
+                              context.read<UserProfileBloc>().add(
+                                GetProfileEvent(),
+                              );
+                              context.read<WatchListBloc>().add(
+                                LoadWatchListEvent(),
+                              );
+                            }
+                          },
+                          onExitTap: () {},
+                          onTabChanged: (showWatch) {
+                            setState(() {
+                              showWatchList = showWatch;
+                            });
                           },
                         );
-                        if (updated == true) {
-                          context.read<UserProfileBloc>().add(
-                            GetProfileEvent(),
-                          );
-                          context.read<WatchListBloc>().add(
-                            LoadWatchListEvent(),
-                          );
-                        }
-                      },
-                      onExitTap: () {},
-                      onTabChanged: (showWatch) {
-                        setState(() {
-                          showWatchList = showWatch;
-                        });
-                        if (!showWatch) {
-                          context.read<HistoryBloc>().add(LoadHistoryEvent());
-                        } else {
-                          context.read<WatchListBloc>().add(
-                            LoadWatchListEvent(),
-                          );
-                        }
                       },
                     );
                   },
