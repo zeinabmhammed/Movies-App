@@ -15,7 +15,6 @@ import '../bloc/updateProfile/update_profile_event.dart';
 import '../bloc/updateProfile/update_profile_state.dart';
 import '../bloc/userProfile/user_profile_bloc.dart';
 import '../bloc/userProfile/user_profile_event.dart';
-import '../bloc/userProfile/user_profile_state.dart';
 import '../widgets/avatar_picker.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
@@ -40,15 +39,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!initialized) {
-      final state = context.read<UserProfileBloc>().state;
-      if (state is ProfileLoaded) {
-        userName = state.user.name;
-        phone = state.user.phone;
-        avatarId = state.user.imageId;
-        nameController.text = userName;
-        phoneController.text = phone;
-        newAvatarId = avatarId;
-      }
+      final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      userName = args['userName'];
+      phone = args['phone'];
+      avatarId = args['avatarId'];
+      newAvatarId = avatarId;
+      nameController.text = userName;
+      phoneController.text = phone;
+
       initialized = true;
     }
   }
@@ -109,7 +107,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     CircleAvatar(
                       radius: resp.scaleWidth(55),
                       backgroundImage: AssetImage(
-                        AppImages.avatarMap[newAvatarId]!,
+                        AppImages.avatarMap[newAvatarId] ?? AppImages.avatar1,
                       ),
                     ),
                     Positioned(

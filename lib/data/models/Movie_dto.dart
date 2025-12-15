@@ -48,9 +48,13 @@ class MovieDto {
     titleEnglish = json['title_english'];
     titleLong = json['title_long'];
     slug = json['slug'];
-    year = json['year'];
-    rating = json['rating'];
-    runtime = json['runtime'];
+    year = json['year'] is String ? int.tryParse(json['year']) : json['year'];
+    rating = json['rating'] is String
+        ? num.tryParse(json['rating'])
+        : json['rating'];
+    runtime = json['runtime'] is String
+        ? int.tryParse(json['runtime'])
+        : json['runtime'];
     genres = json['genres'] != null ? json['genres'].cast<String>() : [];
     summary = json['summary'];
     descriptionFull = json['description_full'];
@@ -61,11 +65,13 @@ class MovieDto {
     backgroundImage = json['background_image'];
     backgroundImageOriginal = json['background_image_original'];
     smallCoverImage = json['small_cover_image'];
-    mediumCoverImage = json['medium_cover_image'];
+    mediumCoverImage = json['medium_cover_image'] ?? json['imageURL'] ?? '';
     largeCoverImage = json['large_cover_image'];
     state = json['state'];
     dateUploaded = json['date_uploaded'];
-    dateUploadedUnix = json['date_uploaded_unix'];
+    dateUploadedUnix = json['date_uploaded_unix'] is String
+        ? num.tryParse(json['date_uploaded_unix'])
+        : json['date_uploaded_unix'];
   }
   num? id;
   String? url;

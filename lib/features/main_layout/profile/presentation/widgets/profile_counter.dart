@@ -7,10 +7,13 @@ import '../bloc/history/history_bloc.dart';
 import '../bloc/history/history_state.dart';
 
 class ProfileCounters extends StatelessWidget {
-  const ProfileCounters({
+  int watchListCount;
+  int historyCount;
+
+  ProfileCounters({
     super.key,
-    required int watchListCount,
-    required int historyCount,
+    required this.watchListCount,
+    required this.historyCount,
   });
 
   @override
@@ -24,7 +27,7 @@ class ProfileCounters extends StatelessWidget {
             int count = 0;
             if (state is WatchListCountLoaded) count = state.count;
             return Text(
-              '$count',
+              '$watchListCount',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: resp.scaleWidth(24),
@@ -37,7 +40,7 @@ class ProfileCounters extends StatelessWidget {
             int count = 0;
             if (state is HistoryCountLoaded) count = state.count;
             return Text(
-              '$count',
+              '$historyCount',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: resp.scaleWidth(24),

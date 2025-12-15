@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/features/auth/presentation/screens/forget_screen/forget_password_screen.dart';
-import 'package:movies_app/features/main_layout/main_layout.dart';
 import 'package:movies_app/features/splash/presentation/screens/splash_screen.dart';
 import 'core/di/dependency_injection.dart';
 import 'core/resources/theme/AppTheme.dart';
@@ -19,13 +18,11 @@ void main() async {
   await init();
   configureDependencies();
 
-
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +46,9 @@ class MyApp extends StatelessWidget {
           Routes.searchRoute: (_) => const MovieSearchWrapper(),
           Routes.profileRoute: (_) => const ProfileWrapper(),
           Routes.updateProfileRoute: (_) => const UpdateProfileWrapper(),
-          Routes.mainRoute: (_) => const MainLayoutWrapper(),        },
+          Routes.mainRoute: (_) => const MainLayoutWrapper(),
+        },
       ),
     );
   }
 }
-
-
-

@@ -31,9 +31,9 @@ class WatchListWidget extends StatelessWidget {
             padding: EdgeInsets.all(resp.scaleWidth(8)),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: resp.getGridCount(
-                  mobile: 2, tablet: 3, desktop: 4),
-              mainAxisSpacing: resp.scaleHeight(16),
-              crossAxisSpacing: resp.scaleWidth(16),
+                  mobile: 3, tablet: 4, desktop: 5),
+              mainAxisSpacing: resp.scaleHeight(10),
+              crossAxisSpacing: resp.scaleWidth(10),
               childAspectRatio: resp.gridAspectRatio(),
             ),
             itemCount: movies.length,

@@ -39,6 +39,7 @@ class WatchListBloc extends Bloc<WatchListEvent, WatchListState> {
     on<GetWatchListCount>((event, emit) async {
       try {
         final movies = await getWatchList();
+        print("WatchList length: ${movies.length}");
         emit(WatchListCountLoaded(movies.length));
       } catch (e) {
         emit(WatchListError("Failed to get watch list count: ${e.toString()}"));

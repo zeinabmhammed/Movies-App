@@ -10,6 +10,7 @@ import '../bloc/userProfile/user_profile_event.dart';
 import '../bloc/userProfile/user_profile_state.dart';
 import '../bloc/watchList/watch_list_bloc.dart';
 import '../bloc/watchList/watch_list_event.dart';
+import '../bloc/watchList/watch_list_state.dart';
 import '../widgets/history_list.dart';
 import '../widgets/profile_header_widget.dart';
 import '../widgets/watch_list.dart';
@@ -27,9 +28,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<UserProfileBloc>().add(GetProfileEvent());
     context.read<HistoryBloc>().add(LoadHistoryEvent());
     context.read<WatchListBloc>().add(LoadWatchListEvent());
+    context.read<UserProfileBloc>().add(GetProfileEvent());
   }
 
   @override
@@ -44,44 +45,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
               builder: (context, state) {
                 String userName = "User";
                 String phone = "0000000000";
-                int watchListCount = 0;
                 int historyCount = 0;
                 int avatarId = 1;
 
                 if (state is ProfileLoaded) {
                   userName = state.user.name;
                   phone = state.user.phone;
-                  watchListCount = state.watchListCount;
                   historyCount = state.historyCount;
                   avatarId = state.user.imageId;
                 }
 
-                return ProfileHeaderWidget(
-                  userName: userName,
-                  avatarImage:
-                      AppImages.avatarMap[avatarId] ?? AppImages.avatar1,
-                  watchListCount: watchListCount,
-                  historyCount: historyCount,
-                  showWatchList: showWatchList,
-                  onEditProfileTap: () async {
-                    final updated = await Navigator.pushNamed(
-                      context,
-                      Routes.updateProfileRoute,
-                    );
-                    if (updated == true) {
-                      context.read<UserProfileBloc>().add(GetProfileEvent());
+                return BlocSelector<WatchListBloc, WatchListState, int>(
+                  selector: (watchState) {
+                    if (watchState is WatchListLoaded) {
+                      print("WatchList length: ${watchState.movies.length}");
+                      return watchState.movies.length;
                     }
+                    return 0;
                   },
-                  onExitTap: () {},
-                  onTabChanged: (showWatch) {
-                    setState(() {
-                      showWatchList = showWatch;
-                    });
-                    if (!showWatch) {
-                      context.read<HistoryBloc>().add(LoadHistoryEvent());
-                    } else {
-                      context.read<WatchListBloc>().add(LoadWatchListEvent());
-                    }
+                  builder: (context, watchListCount) {
+                    return ProfileHeaderWidget(
+                      userName: userName,
+                      avatarImage:
+                          AppImages.avatarMap[avatarId] ?? AppImages.avatar1,
+                      watchListCount: watchListCount,
+                      historyCount: historyCount,
+                      showWatchList: showWatchList,
+                      onEditProfileTap: () async {
+                        final updated = await Navigator.pushNamed(
+                          context,
+                          Routes.updateProfileRoute,
+                          arguments: {
+                            'userName': userName,
+                            'phone': phone,
+                            'avatarId': avatarId,
+                          },
+                        );
+                        if (updated == true) {
+                          context.read<UserProfileBloc>().add(
+                            GetProfileEvent(),
+                          );
+                          context.read<WatchListBloc>().add(
+                            LoadWatchListEvent(),
+                          );
+                        }
+                      },
+                      onExitTap: () {},
+                      onTabChanged: (showWatch) {
+                        setState(() {
+                          showWatchList = showWatch;
+                        });
+                        if (!showWatch) {
+                          context.read<HistoryBloc>().add(LoadHistoryEvent());
+                        } else {
+                          context.read<WatchListBloc>().add(
+                            LoadWatchListEvent(),
+                          );
+                        }
+                      },
+                    );
                   },
                 );
               },

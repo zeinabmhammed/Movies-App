@@ -15,6 +15,8 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
         await addToHistory(event.movie);
         final movies = await getHistory();
         emit(HistoryLoaded(movies));
+
+        emit(HistoryCountLoaded(movies.length));
       } catch (e) {
         emit(HistoryError(e.toString()));
       }
