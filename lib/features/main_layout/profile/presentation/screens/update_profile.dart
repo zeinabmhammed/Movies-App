@@ -7,6 +7,7 @@ import '../../../../../core/resources/commonWidgets/custom_button.dart';
 import '../../../../../core/resources/commonWidgets/custom_textField.dart';
 import '../../../../../core/resources/responsive/responsive.dart';
 import '../../../../../core/resources/styles_manger.dart';
+import '../../../../../core/routes_manger/routes.dart';
 import '../bloc/deleteProfile/delete_profile_bloc.dart';
 import '../bloc/deleteProfile/delete_profile_event.dart';
 import '../bloc/deleteProfile/delete_profile_state.dart';
@@ -77,7 +78,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Account deleted successfully')),
               );
-              Navigator.pop(context);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.loginRoute,
+                (route) => false,
+              );
             } else if (state is DeleteProfileFailure) {
               ScaffoldMessenger.of(
                 context,
