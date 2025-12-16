@@ -109,7 +109,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               );
                             }
                           },
-                          onExitTap: () {},
+                          onExitTap: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Logged out successfully"),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+
+                            Future.delayed(const Duration(milliseconds: 800), () {
+                              Navigator.pushReplacementNamed(
+                                context,
+                                Routes.loginRoute,
+                              );
+                            });
+                          },
                           onTabChanged: (showWatch) {
                             setState(() {
                               showWatchList = showWatch;
